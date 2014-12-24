@@ -12,10 +12,10 @@ namespace CSvnBranchLocker
 {
     public partial class FormLogin : Form
     {
-        public FormLogin()
+        public FormLogin(string szPassword)
         {
             InitializeComponent();
-            //this.tbPassword.Text = "57jieif*94Jkd1";
+            this.tbPassword.Text = szPassword;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)

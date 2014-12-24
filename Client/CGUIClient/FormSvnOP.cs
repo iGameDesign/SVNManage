@@ -8,19 +8,52 @@ using System.Windows.Forms;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 
 namespace CGUIClient
 {
 	public partial class FormSvnOP : Form
 	{
+        string szFileIni = Directory.GetCurrentDirectory() + "/CGUIClient.ini";
         private int nBranches;// trunkroots.conf 文件里面分支数量
         private Dictionary<string, int> dictBranches = new Dictionary<string, int>();
+        private string szPassword = "";
+
+        #region "读取配置文件"
+
+        [DllImport("kernel32")]
+        private static extern long WritePrivateProfileString(string section, string key, string val, string filepath);
+
+        [DllImport("kernel32")]
+        private static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retval, int size, string filePath);
+
+        public string IniReadValue(string section, string key)
+        {
+            StringBuilder temp = new StringBuilder(255);
+
+            int i = GetPrivateProfileString(section, key, "", temp, 255, this.szFileIni);
+            return temp.ToString();
+        }
+
+        #endregion
 
 		public FormSvnOP()
 		{
 			InitializeComponent();
-			this.txtBoxIP.Text = "192.168.1.242";
-			this.txtBoxPort.Text = "18008";
+			//this.txtBoxIP.Text = "192.168.1.242";
+            //this.txtBoxIP.Text = "svn.funova.com";
+            //this.txtBoxPort.Text = "18008";
+            this.txtBoxIP.Text = IniReadValue("Svn", "SvnServerIP");
+            this.txtBoxPort.Text = IniReadValue("Svn", "SvnServerPort");
+
+            string[] temp = IniReadValue("Svn", "ProjectName").Split('|');
+            this.cbProjectName.Items.AddRange(temp);
+            if (temp.Length > 0)
+            {
+                this.cbProjectName.SelectedIndex = 0;
+            }
+
+            szPassword = IniReadValue("Svn", "Password");
 		}
 
         //public void InitRootCB()
@@ -34,7 +67,7 @@ namespace CGUIClient
 
         public void GetTrunkRoots()
         {
-            string strroots = DispatchCmd("getroots");
+            string strroots = DispatchCmd("getroots" + "\t" + this.cbProjectName.SelectedItem);
             string[] strArray = strroots.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
             this.nBranches = strArray.Length;
             //this.ckListBoxBranches.Items.Clear();
@@ -58,7 +91,10 @@ namespace CGUIClient
                     //this.Log(string.Format("SetItemChecked {0} .", i), Color.Red);
                 }
             }
-            this.cbSelRoot.SelectedIndex = 1;
+            if(this.nBranches > 0)
+            {
+                this.cbSelRoot.SelectedIndex = 0;
+            }
         }
 
 		///从服务器获取主分支列表
@@ -96,7 +132,7 @@ namespace CGUIClient
 				byte[] buffer = new byte[0x400];
 				int num = stream.Read(buffer, 0, 0x400);
 				result = unicode.GetString(buffer).Trim(new char[] { '\0' });
-				this.Log("接收申请结果:" + result, Color.DarkRed);
+				this.Log("接收申请结果:\n" + result, Color.DarkRed);
 				client.Close();
 			}
 			catch (Exception exception)
@@ -117,7 +153,7 @@ namespace CGUIClient
 				if (ret == System.Windows.Forms.DialogResult.OK)
 				{
 					Log("请求创建主分支:" + this.txtBoxBranch.Text, Color.DarkRed);
-					cmd = string.Format("createroot\t{0}\t{1}\t{2}\t{3}", this.txtLocalIP.Text, this.txtBoxName.Text, this.txtBoxBranch.Text, this.cbSelRoot.Text);
+                    cmd = string.Format("createroot\t{0}\t{1}\t{2}\t{3}\t{4}", this.txtLocalIP.Text, this.txtBoxName.Text, this.txtBoxBranch.Text, this.cbSelRoot.Text, this.cbProjectName.SelectedItem);
 				}
 				else
 				{
@@ -129,7 +165,7 @@ namespace CGUIClient
 			else
 			{
 				// 创建开发分支直接创建
-				cmd = string.Format("createbranch\t{0}\t{1}\t{2}\t{3}", this.txtLocalIP.Text, this.txtBoxName.Text, this.txtBoxBranch.Text, this.cbSelRoot.Text);
+                cmd = string.Format("createbranch\t{0}\t{1}\t{2}\t{3}\t{4}", this.txtLocalIP.Text, this.txtBoxName.Text, this.txtBoxBranch.Text, this.cbSelRoot.Text, this.cbProjectName.SelectedItem);
 			}
 			DispatchCmd(cmd);
 			//InitRootCB();

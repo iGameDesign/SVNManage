@@ -20,7 +20,7 @@
             while ((str = reader.ReadLine()) != null)
             {
                 str = str.Trim();
-                if (str[0] != '#')
+                if (str != "" && str[0] != '#')
                 {
                     string[] strArray = str.Split(new char[] { '=' });
                     if (strArray.Length == 2)

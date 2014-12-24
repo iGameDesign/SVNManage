@@ -37,13 +37,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.tbLoginIP = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.btCommit = new System.Windows.Forms.Button();
             this.rtbLogInfo = new System.Windows.Forms.RichTextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnLockBranches = new System.Windows.Forms.Button();
             this.ckListBoxBranches = new System.Windows.Forms.CheckedListBox();
             this.btnUpdateBranches = new System.Windows.Forms.Button();
+            this.cbProjectName = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -61,7 +60,7 @@
             this.tbSvnServerIP.Name = "tbSvnServerIP";
             this.tbSvnServerIP.Size = new System.Drawing.Size(166, 21);
             this.tbSvnServerIP.TabIndex = 1;
-            this.tbSvnServerIP.Text = "192.168.1.242";
+            this.tbSvnServerIP.Text = "svn.funova.com";
             // 
             // label2
             // 
@@ -123,17 +122,6 @@
             this.label5.TabIndex = 8;
             this.label5.Text = "选择主分支：";
             // 
-            // btCommit
-            // 
-            this.btCommit.Enabled = false;
-            this.btCommit.Location = new System.Drawing.Point(189, 99);
-            this.btCommit.Name = "btCommit";
-            this.btCommit.Size = new System.Drawing.Size(75, 23);
-            this.btCommit.TabIndex = 10;
-            this.btCommit.Text = "解锁主分支";
-            this.btCommit.UseVisualStyleBackColor = true;
-            this.btCommit.Click += new System.EventHandler(this.btCommit_Click);
-            // 
             // rtbLogInfo
             // 
             this.rtbLogInfo.Location = new System.Drawing.Point(-1, 260);
@@ -149,16 +137,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(41, 12);
             this.label6.TabIndex = 13;
-            this.label6.Text = "主干：";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(116, 100);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(61, 21);
-            this.textBox1.TabIndex = 14;
-            this.textBox1.Text = "bbt";
+            this.label6.Text = "项目：";
             // 
             // btnLockBranches
             // 
@@ -188,18 +167,25 @@
             this.btnUpdateBranches.UseVisualStyleBackColor = true;
             this.btnUpdateBranches.Click += new System.EventHandler(this.btnUpdateBranches_Click);
             // 
+            // cbProjectName
+            // 
+            this.cbProjectName.FormattingEnabled = true;
+            this.cbProjectName.Location = new System.Drawing.Point(117, 100);
+            this.cbProjectName.Name = "cbProjectName";
+            this.cbProjectName.Size = new System.Drawing.Size(121, 20);
+            this.cbProjectName.TabIndex = 18;
+            // 
             // FormSvnBranchLocker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(500, 539);
+            this.Controls.Add(this.cbProjectName);
             this.Controls.Add(this.btnUpdateBranches);
             this.Controls.Add(this.ckListBoxBranches);
             this.Controls.Add(this.btnLockBranches);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.rtbLogInfo);
-            this.Controls.Add(this.btCommit);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.tbLoginIP);
             this.Controls.Add(this.label4);
@@ -229,13 +215,12 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox tbLoginIP;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btCommit;
         private System.Windows.Forms.RichTextBox rtbLogInfo;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btnLockBranches;
         private System.Windows.Forms.CheckedListBox ckListBoxBranches;
         private System.Windows.Forms.Button btnUpdateBranches;
+        private System.Windows.Forms.ComboBox cbProjectName;
     }
 }
 

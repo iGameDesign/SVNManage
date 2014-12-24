@@ -182,7 +182,8 @@
             this.txtSvrIP.Name = "txtSvrIP";
             this.txtSvrIP.Size = new Size(0xbb, 0x15);
             this.txtSvrIP.TabIndex = 1;
-            this.txtSvrIP.Text = "192.168.1.242";
+            //this.txtSvrIP.Text = "192.168.1.242";
+            this.txtSvrIP.Text = "svn.funova.com";
             this.label3.AutoSize = true;
             this.label3.Location = new Point(12, 0x1a);
             this.label3.Name = "label3";

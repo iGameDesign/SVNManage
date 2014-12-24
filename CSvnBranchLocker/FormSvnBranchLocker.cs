@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,20 +12,53 @@ using System.Security.Cryptography;
 using System.Net;
 using System.Net.Sockets;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace CSvnBranchLocker
 {
     public partial class FormSvnBranchLocker : Form
     {
+        string szFileIni = Directory.GetCurrentDirectory() + "/CSvnBranchLocker.ini";
         private int nBranches;// trunkroots.conf 文件里面分支数量
         private Dictionary<string, int> dictBranches = new Dictionary<string, int>();
+        private string szPassword = "";
+
+        #region "读取配置文件"
+
+        [DllImport("kernel32")]
+        private static extern long WritePrivateProfileString(string section, string key, string val, string filepath);
+
+        [DllImport("kernel32")]
+        private static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retval, int size, string filePath);
+
+        public string IniReadValue(string section, string key) 
+        { 
+            StringBuilder temp = new StringBuilder(255);
+
+            int i = GetPrivateProfileString(section, key, "", temp, 255, this.szFileIni); 
+            return temp.ToString();
+        }
+
+        #endregion
 
         public FormSvnBranchLocker()
         {
             InitializeComponent();
-            this.tbSvnServerIP.Text = "192.168.1.242";
+            //this.tbSvnServerIP.Text = "192.168.1.242";
+            //this.tbSvnServerIP.Text = "svn.funova.com";
             //this.tbSvnServerIP.Text = "192.168.2.135";
-            this.tbSvnServerPort.Text = "18008";
+            //this.tbSvnServerPort.Text = "18008";
+            this.tbSvnServerIP.Text = IniReadValue("Svn", "SvnServerIP");
+            this.tbSvnServerPort.Text = IniReadValue("Svn", "SvnServerPort");
+
+            string[] temp = IniReadValue("Svn", "ProjectName").Split('|');
+            this.cbProjectName.Items.AddRange(temp);
+            if(temp.Length>0)
+            {
+                this.cbProjectName.SelectedIndex = 0;
+            }
+
+            szPassword = IniReadValue("Svn", "Password");
         }
 
         private void FormSvnBranchLocker_Load(object sender, EventArgs e)
@@ -35,7 +69,7 @@ namespace CSvnBranchLocker
                 this.tbSvnServerIP.Text = commandLineArgs[1];
             }
 
-            FormLogin frmLogin = new FormLogin();
+            FormLogin frmLogin = new FormLogin(szPassword);
             while (true)
             {
                 if (frmLogin.ShowDialog() != DialogResult.OK)
@@ -47,10 +81,11 @@ namespace CSvnBranchLocker
                 string strPassword = GetMD5(frmLogin.tbPassword.Text);
                 if (this.Login(strPassword))
                 {
-                    IPHostEntry host = new IPHostEntry();
-                    host = Dns.GetHostEntry(Dns.GetHostName());
+                    //IPHostEntry host = new IPHostEntry();
+                    //host = Dns.GetHostEntry(Dns.GetHostName());
                     this.tbLoginUser.Text = Environment.MachineName;
-                    this.tbLoginIP.Text = host.AddressList[1].MapToIPv4().ToString();
+                    //this.tbLoginIP.Text = host.AddressList[1].MapToIPv4().ToString();
+                    this.tbLoginIP.Text = GetIPv4Address();
                     //this.UpdateLockStatus();
                     this.GetTrunkRoots();
                     return;
@@ -79,7 +114,7 @@ namespace CSvnBranchLocker
             {
                 TcpClient client = new TcpClient();
                 client.Connect(this.tbSvnServerIP.Text, int.Parse(this.tbSvnServerPort.Text));
-                string s = string.Format("{0}\t{1}\t{2}", "login", Environment.MachineName, strPassword);
+                string s = string.Format("{0}\t{1}\t{2}\t{3}", "login", Environment.MachineName, strPassword, this.cbProjectName.SelectedItem);
                 Stream stream = client.GetStream();
                 byte[] bytes = new ASCIIEncoding().GetBytes(s);
                 Encoding unicode = Encoding.Unicode;
@@ -142,7 +177,7 @@ namespace CSvnBranchLocker
 
         private void GetTrunkRoots()
         {
-            string strroots = DispatchCmd("getroots");
+            string strroots = DispatchCmd("getroots" + "\t" + this.cbProjectName.SelectedItem);
             string[] strArray = strroots.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
             this.nBranches = strArray.Length;
             this.ckListBoxBranches.Items.Clear();
@@ -182,7 +217,7 @@ namespace CSvnBranchLocker
         //    {
         //        TcpClient client = new TcpClient();
         //        client.Connect(this.tbSvnServerIP.Text, int.Parse(this.tbSvnServerPort.Text));
-        //        string s = string.Format("{0}\t{1}\t{2}", "getlockstatu", this.tbLoginUser.Text, "2");
+        //        string s = string.Format("{0}\t{1}\t{2}\t{3}", "getlockstatu", this.tbLoginUser.Text, "2", this.cbProjectName.SelectedItem);
         //        Stream stream = client.GetStream();
         //        byte[] bytes = new ASCIIEncoding().GetBytes(s);
         //        Encoding unicode = Encoding.Unicode;
@@ -207,7 +242,7 @@ namespace CSvnBranchLocker
             {
                 TcpClient client = new TcpClient();
                 client.Connect(this.tbSvnServerIP.Text, int.Parse(this.tbSvnServerPort.Text));
-                string s = string.Format("{0}\t{1}\t{2}", "getlockstatus", this.tbLoginUser.Text, "2");
+                string s = string.Format("{0}\t{1}\t{2}\t{3}", "getlockstatus", this.tbLoginUser.Text, "2", this.cbProjectName.SelectedItem);
                 Stream stream = client.GetStream();
                 byte[] bytes = new ASCIIEncoding().GetBytes(s);
                 Encoding unicode = Encoding.Unicode;
@@ -279,7 +314,7 @@ namespace CSvnBranchLocker
                 this.Log(string.Format("连接[{0}:{1}]...", this.tbSvnServerIP.Text, this.tbSvnServerPort.Text), Color.Blue);
                 client.Connect(this.tbSvnServerIP.Text, int.Parse(this.tbSvnServerPort.Text));
                 this.Log("已连接!", Color.DarkSlateBlue);
-                string s = string.Format("{0}\t{1}\t{2}", new object[] { "lockbranches", this.tbLoginUser.Text, flags });
+                string s = string.Format("{0}\t{1}\t{2}\t{3}", new object[] { "lockbranches", this.tbLoginUser.Text, flags, this.cbProjectName.SelectedItem });
                 Stream stream = client.GetStream();
                 byte[] bytes = new ASCIIEncoding().GetBytes(s);
                 Encoding unicode = Encoding.Unicode;
@@ -302,6 +337,22 @@ namespace CSvnBranchLocker
         private void btnUpdateBranches_Click(object sender, EventArgs e)
         {
             this.GetTrunkRoots();
+        }
+
+        public static string GetIPv4Address()
+        {
+            string sz_ip = "";
+            IPAddress[] ips = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList;
+            foreach (IPAddress ip in ips)
+            {
+                //根据AddressFamily判断是否为ipv4,如果是InterNetWork则为ipv6
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    sz_ip = ip.ToString();
+                    break;
+                }
+            }
+            return sz_ip;
         }
     }
 }

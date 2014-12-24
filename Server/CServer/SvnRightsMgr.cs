@@ -22,8 +22,9 @@
         private string m_strRet = "";
 
 		private string m_baseurl;
-		private string m_svndb;
+		public string m_svndb;
 		private string m_svnpath;
+        public string m_strToken;
 		private string m_autobranch;
 
 		private string m_strUrlDest;
@@ -82,7 +83,7 @@
             return false;
         }
 
-		public string CreateRoot(string strIP, string strUserName, string strArg, string strVer)
+        public string CreateRoot(string strIP, string strUserName, string strArg, string strVer, string szProjectName)
 		{
 			this.m_strRet = "WARNING:no result!";
 			string strfrom = string.Format("IP:{0}, User:{1}", strIP, strUserName);
@@ -101,7 +102,7 @@
 				string strDestRights = this.getStrSrc(strArg);
 				this.CopyRights(this.m_strAuthFile, strSrc, strDestRights);
 				// 添加主分支到列表
-				this.addroot(strArg);
+                this.addroot(strArg, szProjectName);
 				this.m_strRet = string.Format("创建分支[{0}]成功！具体地址:\r\n{1}\r\n", strArg, this.getStrUrlSrc(strArg));
 			}
 			else
@@ -111,8 +112,12 @@
 			return this.m_strRet;
 		}
 
-		private bool CreateSvnBranch(string strIP, string strUserName, string strBranchNameA, string strVer)
+        private bool CreateSvnBranch(string strIP, string strUserName, string strBranchNameA, string strVer, string szProjectName)
         {
+            this.m_strUrlDest = string.Format(m_baseurl + "/{0}/{1}/",
+                m_svndb.Trim(new Char[] { '/' }),
+                m_autobranch.Trim(new Char[] { '/' }));
+            this.m_nVer = this.getVer(this.m_svndb) + 1;
             string strprefix = string.Format("{0}a{1:0000}_", this.m_strUrlDest, this.m_nVer);
             string pureBranchName = this.GetPureBranchName(strBranchNameA);
             string strfrom = string.Format("IP:{0}, User:{1}", strIP, strUserName);
@@ -148,24 +153,30 @@
 
         public string getAuthor(int nVersion)
         {
+            this.m_strReposPath = string.Format("{0}/{1}", m_svnpath, m_svndb);
             return CommandDo.Execute("svnlook", string.Format("author {0} -r {1}", this.m_strReposPath, nVersion));
         }
 
         public string getChanged(int nVersion)
         {
+            this.m_strReposPath = string.Format("{0}/{1}", m_svnpath, m_svndb);
             return CommandDo.Execute("svnlook", string.Format("changed {0} -r {1}", this.m_strReposPath, nVersion));
         }
 
-		public string getRoots()
+        public string getRoots(string szProjectName)
 		{
-			string rootsfile = "trunkroots.conf";
+            if (szProjectName == "")
+                return "";
+            string rootsfile = szProjectName + "/trunkroots.conf";
 			string trunks = GetRootsText(rootsfile);
 			return trunks;
 		}
 
-		public void addroot(string rootname)
+		public void addroot(string rootname, string szProjectName)
 		{
-			using (StreamWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + "/trunkroots.conf", true))
+            if (szProjectName == "")
+                return ;
+            using (StreamWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + "/" + szProjectName + "/trunkroots.conf", true))
 			{
 				writer.WriteLine("/" + rootname);
 			}
@@ -201,15 +212,19 @@
 
         public string getLastVersion()
         {
+            this.m_strReposPath = string.Format("{0}/{1}", m_svnpath, m_svndb);
             return CommandDo.Execute("svnlook", string.Format("youngest {0}", this.m_strReposPath));
         }
 
-        public bool getLockStatu()
+        public bool getLockStatu(string szProjectName)
         {
-            bool flag;
+            bool flag = false;
+            if (szProjectName == "")
+                return flag;
+
             try
             {
-                using (StreamReader reader = new StreamReader(Directory.GetCurrentDirectory() + "/lockstatu.txt"))
+                using (StreamReader reader = new StreamReader(Directory.GetCurrentDirectory() + "/" + szProjectName + "/lockstatu.txt"))
                 {
                     flag = int.Parse(reader.ReadLine()) == 1;
                 }
@@ -223,12 +238,15 @@
             return flag;
         }
 
-        public string getLockStatus()
+        public string getLockStatus(string szProjectName)
         {
             string flags = "";
+            if (szProjectName == "")
+                return flags;
+
             try
             {
-                using (StreamReader reader = new StreamReader(Directory.GetCurrentDirectory() + "/lockstatu.txt"))
+                using (StreamReader reader = new StreamReader(Directory.GetCurrentDirectory() + "/" + szProjectName + "/lockstatu.txt"))
                 {
                     flags = reader.ReadLine();
                 }
@@ -242,13 +260,16 @@
             return flags;
         }
 
-        public void setLockStatus(string flags)
+        public void setLockStatus(string flags, string szProjectName)
         {
+            if (szProjectName == "")
+                return;
+
             try
             {
                 if (flags != "")
                 {
-                    using (StreamWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + "/lockstatu.txt"))
+                    using (StreamWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + "/" + szProjectName + "/lockstatu.txt"))
                     {
                         writer.WriteLine(flags);
                     }
@@ -295,11 +316,12 @@
             return str;
         }
 
-        public string getRightsBranches()
+        public string getRightsBranches(string szProjectName)
         {
 			CommandDo.Execute("svn", string.Format("up {0}", this.m_strAuthFile));
 			this.InitRights(this.GetFileText(this.m_strAuthFile));
-            string str = "gunsoul:/branches/autobranch/";
+            //string str = "gunsoul:/branches/autobranch/";
+            string str = szProjectName + ":/branches/autobranch/";
             ArrayList list = new ArrayList();
             Hashtable hashtable = new Hashtable();
             string key = "";
@@ -362,12 +384,15 @@
             }
         }
 
-        public int getunlockVer()
+        public int getunlockVer(string szProjectName)
         {
-            int num;
+            int num = 0;
+            if (szProjectName == "")
+                return num;
+
             try
             {
-                using (StreamReader reader = new StreamReader(Directory.GetCurrentDirectory() + "/unlockver.txt"))
+                using (StreamReader reader = new StreamReader(Directory.GetCurrentDirectory() + "/" + szProjectName + "/unlockver.txt"))
                 {
                     num = int.Parse(reader.ReadLine());
                 }
@@ -381,12 +406,15 @@
             return num;
         }
 
-        private int getVer()
+        private int getVer(string szProjectName)
         {
-            int num;
+            int num = 0;
+            if (szProjectName == "")
+                return num;
+
             try
             {
-                using (StreamReader reader = new StreamReader(Directory.GetCurrentDirectory() + "/ver.txt"))
+                using (StreamReader reader = new StreamReader(Directory.GetCurrentDirectory() + "/" + szProjectName + "/ver.txt"))
                 {
                     num = int.Parse(reader.ReadLine());
                 }
@@ -408,23 +436,26 @@
 
         public bool Lock(bool bLock)
         {
+            this.m_strHookDir = string.Format("{0}/{1}/hooks", m_svnpath, m_svndb);
             string purePathEx = this.GetPurePathEx(this.m_strHookDir);
             if (bLock)
             {
             }
-            this.SetLockStatu(bLock);
+            this.SetLockStatu(bLock, this.m_svndb);
             return true;
         }
 
-        public string OperSvn(string strIP, string strUserName, string strArg, string strVer)
+        public string OperSvn(string strIP, string strUserName, string strArg, string strVer, string szProjectName)
         {
             this.m_strRet = "WARNING:no result!";
-            if (this.CreateSvnBranch(strIP, strUserName, strArg, strVer))
+            if (this.CreateSvnBranch(strIP, strUserName, strArg, strVer, szProjectName))
             {
+                this.m_strDest = string.Format("{0}:{1}", m_svndb, m_autobranch);
+                this.m_nVer = this.getVer(this.m_svndb) + 1;
                 string strSrc = this.getStrSrc(strVer);
                 string strDestRights = string.Format(this.m_strDest + "/a{0:0000}_{1}", this.m_nVer, this.GetPureBranchName(strArg));
                 this.CopyRights(this.m_strAuthFile, strSrc, strDestRights);
-                this.setVer(++this.m_nVer);
+                this.setVer(++this.m_nVer, szProjectName);
             }
             return this.m_strRet;
         }
@@ -461,7 +492,7 @@
             else
             {
                 this.m_nAfterUnlockVer = int.Parse(str);
-                this.setunlockVer(this.m_nAfterUnlockVer);
+                this.setunlockVer(this.m_nAfterUnlockVer, this.m_svndb);
             }
             if ((((this.m_nAfterLockVer != this.m_nAfterUnlockVer) && bLock) && (this.m_nAfterLockVer > 0)) && (this.m_nAfterUnlockVer > 0))
             {
@@ -532,7 +563,7 @@
             else
             {
                 this.m_nAfterUnlockVer = int.Parse(str);
-                this.setunlockVer(this.m_nAfterUnlockVer);
+                this.setunlockVer(this.m_nAfterUnlockVer, this.m_svndb);
             }
             if ((((this.m_nAfterLockVer != this.m_nAfterUnlockVer) && bLock) && (this.m_nAfterLockVer > 0)) && (this.m_nAfterUnlockVer > 0))
             {
@@ -560,11 +591,11 @@
                         string strFileContent = this.sortandpullback(ref strCommiter);
                         if ((this.m_nAfterUnlockVer + 1) == this.m_nAfterLockVer)
                         {
-                            strFileName = string.Format("[{0}][{1}].txt", this.m_nAfterLockVer, entry.Key);
+                            strFileName = string.Format("[{0}]:[{1}][{2}].txt", this.m_svndb, this.m_nAfterLockVer, entry.Key);
                         }
                         else
                         {
-                            strFileName = string.Format("[{0}-{1}][{2}].txt", this.m_nAfterUnlockVer, this.m_nAfterLockVer, entry.Key);
+                            strFileName = string.Format("[{0}]:[{1}-{2}][{3}].txt", this.m_svndb, this.m_nAfterUnlockVer, this.m_nAfterLockVer, entry.Key);
                         }
                         strFileName = strFileName.Replace("\r\n", "").Trim();
                         strFileName = strFileName.Replace("\n", "").Trim();
@@ -592,44 +623,53 @@
 
 			m_baseurl = this.m_conf.GetValue("baseurl");
             m_svnpath = this.m_conf.GetValue("svnpath").ToString();
-            m_svndb = this.m_conf.GetValue("svndb").ToString();
+            //m_svndb = this.m_conf.GetValue("svndb").ToString();
+            m_strToken = this.m_conf.GetValue("token");
             m_autobranch = this.m_conf.GetValue("autobranch").ToString();
 
             this.m_strLogDir = this.m_conf.GetValue("logs").ToString();
 			this.m_strLink = this.m_conf.GetValue("linkpre").ToString();
 			this.m_strAuthFile = this.m_conf.GetValue("authzfile").ToString();
-            this.m_strReposPath = string.Format("{0}/{1}", m_svnpath, m_svndb);
 
-            this.m_strDest = string.Format("{0}:{1}", m_svndb, m_autobranch);
+            //this.m_strReposPath = string.Format("{0}/{1}", m_svnpath, m_svndb);
+            //this.m_strDest = string.Format("{0}:{1}", m_svndb, m_autobranch);
+            //this.m_strHookDir = string.Format("{0}/{1}/hooks", m_svnpath, m_svndb);
 
-            this.m_strHookDir = string.Format("{0}/{1}/hooks", m_svnpath, m_svndb);
-
-			this.m_strUrlDest = string.Format(m_baseurl + "/{0}/{1}/",
-				m_svndb.Trim(new Char[] { '/' }),
-				m_autobranch.Trim(new Char[] { '/' }));
-            this.m_nVer = this.getVer() + 1;
-            this.m_nAfterUnlockVer = this.getunlockVer();
+            //this.m_strUrlDest = string.Format(m_baseurl + "/{0}/{1}/",
+            //    m_svndb.Trim(new Char[] { '/' }),
+            //    m_autobranch.Trim(new Char[] { '/' }));
+            //this.m_nVer = this.getVer(this.m_svndb) + 1;
+            //this.m_nAfterUnlockVer = this.getunlockVer(this.m_svndb);
         }
 
-        public void SetLockStatu(bool bLock)
+        public void SetLockStatu(bool bLock, string szProjectName)
         {
-            using (StreamWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + "/lockstatu.txt"))
+            if (szProjectName == "")
+                return ;
+
+            using (StreamWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + "/" + szProjectName + "/lockstatu.txt"))
             {
                 writer.WriteLine(bLock ? 1 : 0);
             }
         }
 
-        public void setunlockVer(int nVer)
+        public void setunlockVer(int nVer, string szProjectName)
         {
-            using (StreamWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + "/unlockver.txt"))
+            if (szProjectName == "")
+                return;
+
+            using (StreamWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + "/" + szProjectName + "/unlockver.txt"))
             {
                 writer.WriteLine(nVer);
             }
         }
 
-        private void setVer(int nVer)
+        private void setVer(int nVer, string szProjectName)
         {
-            using (StreamWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + "/ver.txt"))
+            if (szProjectName == "")
+                return;
+
+            using (StreamWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + "/" + szProjectName + "/ver.txt"))
             {
                 writer.WriteLine(nVer);
             }

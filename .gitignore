@@ -4,3 +4,8 @@
 /Server/Backup
 /Server/*.user
 /Client/*.user
+*.suo
+*.rar
+*.exe
+*.pdb
+*/obj
