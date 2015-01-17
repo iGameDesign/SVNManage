@@ -129,3 +129,669 @@
 [2014-12-24 15:08:10] 来自[192.168.2.135]的用户[PENGPENG], 请求建立分支:test_pp, 选择的版本是:/bbt
 [2014-12-24 15:15:20] IP:192.168.2.135, User:PENGPENG
 [2014-12-24 15:15:24] https://svn.funova.com/svn/gunsoul/bbt/
+[2015-01-16 15:49:24] version 1.3
+[2015-01-16 15:49:24] 开启端口服务....
+[2015-01-16 15:49:24] 本地节点：192.168.2.135:18008
+[2015-01-16 15:49:24] 等待连接.....
+[2015-01-16 16:24:53] 来自[192.168.2.135]的用户[PENGPENG], 请求建立主分支:xxx, 选择的版本是:/bbt
+[2015-01-16 16:24:53] IP:192.168.2.135, User:PENGPENG
+[2015-01-16 16:24:53] svn cp -m "create root" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" 192.168.2.135/gunsoul/bbt/ 192.168.2.135/gunsoul/xxx/
+[2015-01-16 16:24:53] 建立分支结果为:创建分支[192.168.2.135/gunsoul/xxx/]失败！原因：
+svn: E205009: 本地操作，非提交操作无须日志信息或版本属性
+
+svn参数：cp -m "create root" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" 192.168.2.135/gunsoul/bbt/ 192.168.2.135/gunsoul/xxx/
+[2015-01-16 16:26:22] version 1.3
+[2015-01-16 16:26:22] 开启端口服务....
+[2015-01-16 16:26:22] 本地节点：192.168.2.135:18008
+[2015-01-16 16:26:22] 等待连接.....
+[2015-01-16 16:26:26] 来自[192.168.2.135]的用户[PENGPENG], 请求建立主分支:xxx, 选择的版本是:/bbt
+[2015-01-16 16:26:26] IP:192.168.2.135, User:PENGPENG
+[2015-01-16 16:26:26] svn cp -m "create root" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" https://192.168.2.135/gunsoul/bbt/ https://192.168.2.135/gunsoul/xxx/
+[2015-01-16 16:26:32] 建立分支结果为:创建分支[https://192.168.2.135/gunsoul/xxx/]失败！原因：
+Process Dead Lock, wait time out.
+svn参数：cp -m "create root" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" https://192.168.2.135/gunsoul/bbt/ https://192.168.2.135/gunsoul/xxx/
+[2015-01-16 16:27:07] version 1.3
+[2015-01-16 16:27:07] 开启端口服务....
+[2015-01-16 16:27:07] 本地节点：192.168.2.135:18008
+[2015-01-16 16:27:07] 等待连接.....
+[2015-01-16 16:29:07] version 1.3
+[2015-01-16 16:29:07] 开启端口服务....
+[2015-01-16 16:29:07] 本地节点：192.168.2.135:18008
+[2015-01-16 16:29:07] 等待连接.....
+[2015-01-16 16:29:24] 来自[192.168.2.135]的用户[PENGPENG], 请求建立主分支:xxx, 选择的版本是:/bbt
+[2015-01-16 16:33:02] IP:192.168.2.135, User:PENGPENG
+[2015-01-16 16:33:03] svn cp -m "create root" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" https://192.168.2.135/gunsoul/bbt/ https://192.168.2.135/gunsoul/xxx/
+[2015-01-16 16:38:13] System.IO.DirectoryNotFoundException: 未能找到路径“E:\var\lib\submin\conf\authz”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   在 System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize)
+   在 System.IO.StreamReader..ctor(String path, Boolean detectEncodingFromByteOrderMarks)
+   在 System.IO.File.OpenText(String path)
+   在 CServer.SvnRightsMgr.GetFileText(String strFile) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 225
+   在 CServer.SvnRightsMgr.CopyRights(String strRightsFile, String srcRights, String strDestRights) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 67
+   在 CServer.SvnRightsMgr.CreateRoot(String strIP, String strUserName, String strArg, String strVer, String szProjectName) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 103
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 101
+[2015-01-16 16:39:45] 来自[192.168.2.135]的用户[PENGPENG], 请求建立分支:xx, 选择的版本是:/bbt
+[2015-01-16 16:42:22] IP:192.168.2.135, User:PENGPENG
+[2015-01-16 16:42:31] https://192.168.2.135/gunsoul/bbt/
+[2015-01-16 16:43:02] https://192.168.2.135/gunsoul/branches/autobranch/a0604_
+[2015-01-16 16:43:05] xx
+[2015-01-16 16:43:11] cp -m "create branch" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" https://192.168.2.135/gunsoul/bbt/ https://192.168.2.135/gunsoul/branches/autobranch/a0604_xx
+[2015-01-16 16:43:31] 建立分支结果为:创建分支[xx]失败！原因：
+Process Dead Lock, wait time out.
+svn参数：cp -m "create branch" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" https://192.168.2.135/gunsoul/bbt/ https://192.168.2.135/gunsoul/branches/autobranch/a0604_xx
+[2015-01-16 18:14:09] version 1.3
+[2015-01-16 18:14:09] 开启端口服务....
+[2015-01-16 18:14:09] 本地节点：192.168.2.135:18008
+[2015-01-16 18:14:09] 等待连接.....
+[2015-01-16 18:14:24] System.BadImageFormatException: 未能加载文件或程序集“System.Data.SQLite, Version=1.0.94.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139”或它的某一个依赖项。试图加载格式不正确的程序。
+文件名:“System.Data.SQLite, Version=1.0.94.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139”
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch)
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 52
+
+警告: 程序集绑定日志记录被关闭。
+要启用程序集绑定失败日志记录，请将注册表值 [HKLM\Software\Microsoft\Fusion!EnableLog] (DWORD)设置为 1。
+注意: 会有一些与程序集绑定失败日志记录关联的性能损失。
+要关闭此功能，请移除注册表值 [HKLM\Software\Microsoft\Fusion!EnableLog]。
+
+[2015-01-16 18:15:19] version 1.3
+[2015-01-16 18:15:19] 开启端口服务....
+[2015-01-16 18:15:19] 本地节点：192.168.2.135:18008
+[2015-01-16 18:15:19] 等待连接.....
+[2015-01-16 18:15:49] System.BadImageFormatException: 未能加载文件或程序集“System.Data.SQLite, Version=1.0.94.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139”或它的某一个依赖项。试图加载格式不正确的程序。
+文件名:“System.Data.SQLite, Version=1.0.94.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139”
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch)
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+
+=== 预绑定状态信息 ===
+日志: 用户 = FUNOVA\pengpeng
+日志: DisplayName = System.Data.SQLite, Version=1.0.94.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139
+ (Fully-specified)
+日志: Appbase = file:///E:/WorkSpace/Tools/SVNSvr/Server/bin/Debug/
+日志: 初始 PrivatePath = NULL
+调用程序集: CServer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null。
+===
+日志: 此绑定从 default 加载上下文开始。
+日志: 未找到应用程序配置文件。
+日志: 使用 C:\Windows\Microsoft.NET\Framework64\v2.0.50727\config\machine.config 的计算机配置文件。
+日志: 策略后引用: System.Data.SQLite, Version=1.0.94.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139
+日志: 试图下载新的 URL file:///E:/WorkSpace/Tools/SVNSvr/Server/bin/Debug/System.Data.SQLite.DLL。
+错误: 未能完成程序集的安装(hr = 0x8007000b)。探测终止。
+
+[2015-01-16 18:19:09] version 1.3
+[2015-01-16 18:19:09] 开启端口服务....
+[2015-01-16 18:19:09] 本地节点：192.168.2.135:18008
+[2015-01-16 18:19:09] 等待连接.....
+[2015-01-16 18:19:14] System.BadImageFormatException: 未能加载文件或程序集“System.Data.SQLite, Version=1.0.48.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139”或它的某一个依赖项。试图加载格式不正确的程序。
+文件名:“System.Data.SQLite, Version=1.0.48.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139”
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch)
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+
+警告: 程序集绑定日志记录被关闭。
+要启用程序集绑定失败日志记录，请将注册表值 [HKLM\Software\Microsoft\Fusion!EnableLog] (DWORD)设置为 1。
+注意: 会有一些与程序集绑定失败日志记录关联的性能损失。
+要关闭此功能，请移除注册表值 [HKLM\Software\Microsoft\Fusion!EnableLog]。
+
+[2015-01-16 18:21:06] version 1.3
+[2015-01-16 18:21:06] 开启端口服务....
+[2015-01-16 18:21:06] 本地节点：192.168.2.135:18008
+[2015-01-16 18:21:06] 等待连接.....
+[2015-01-16 18:21:10] System.BadImageFormatException: 未能加载文件或程序集“System.Data.SQLite, Version=1.0.48.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139”或它的某一个依赖项。试图加载格式不正确的程序。
+文件名:“System.Data.SQLite, Version=1.0.48.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139”
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch)
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+
+警告: 程序集绑定日志记录被关闭。
+要启用程序集绑定失败日志记录，请将注册表值 [HKLM\Software\Microsoft\Fusion!EnableLog] (DWORD)设置为 1。
+注意: 会有一些与程序集绑定失败日志记录关联的性能损失。
+要关闭此功能，请移除注册表值 [HKLM\Software\Microsoft\Fusion!EnableLog]。
+
+[2015-01-16 18:25:19] version 1.3
+[2015-01-16 18:25:19] 开启端口服务....
+[2015-01-16 18:25:19] 本地节点：192.168.2.135:18008
+[2015-01-16 18:25:19] 等待连接.....
+[2015-01-16 18:25:22] System.IO.FileLoadException: 未能加载文件或程序集“System.Data.SQLite, Version=1.0.48.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139”或它的某一个依赖项。找到的程序集清单定义与程序集引用不匹配。 (异常来自 HRESULT:0x80131040)
+文件名:“System.Data.SQLite, Version=1.0.48.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139”
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch)
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+
+警告: 程序集绑定日志记录被关闭。
+要启用程序集绑定失败日志记录，请将注册表值 [HKLM\Software\Microsoft\Fusion!EnableLog] (DWORD)设置为 1。
+注意: 会有一些与程序集绑定失败日志记录关联的性能损失。
+要关闭此功能，请移除注册表值 [HKLM\Software\Microsoft\Fusion!EnableLog]。
+
+[2015-01-16 18:25:42] version 1.3
+[2015-01-16 18:25:42] 开启端口服务....
+[2015-01-16 18:25:42] 本地节点：192.168.2.135:18008
+[2015-01-16 18:25:42] 等待连接.....
+[2015-01-16 18:25:44] System.DllNotFoundException: 无法加载 DLL“SQLite.Interop.dll”: 找不到指定的模块。 (异常来自 HRESULT:0x8007007E)。
+   在 System.Data.SQLite.UnsafeNativeMethods.sqlite3_config_none(SQLiteConfigOpsEnum op)
+   在 System.Data.SQLite.SQLite3.StaticIsInitialized()
+   在 System.Data.SQLite.SQLiteLog.Initialize()
+   在 System.Data.SQLite.SQLiteConnection..ctor(String connectionString, Boolean parseViaFramework)
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 99
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 18:26:05] version 1.3
+[2015-01-16 18:26:05] 开启端口服务....
+[2015-01-16 18:26:05] 本地节点：192.168.2.135:18008
+[2015-01-16 18:26:05] 等待连接.....
+[2015-01-16 18:26:08] System.BadImageFormatException: 试图加载格式不正确的程序。 (异常来自 HRESULT:0x8007000B)
+   在 System.Data.SQLite.UnsafeNativeMethods.sqlite3_config_none(SQLiteConfigOpsEnum op)
+   在 System.Data.SQLite.SQLite3.StaticIsInitialized()
+   在 System.Data.SQLite.SQLiteLog.Initialize()
+   在 System.Data.SQLite.SQLiteConnection..ctor(String connectionString, Boolean parseViaFramework)
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 99
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 18:26:42] version 1.3
+[2015-01-16 18:26:42] 开启端口服务....
+[2015-01-16 18:26:42] 本地节点：192.168.2.135:18008
+[2015-01-16 18:26:42] 等待连接.....
+[2015-01-16 18:26:43] System.BadImageFormatException: 试图加载格式不正确的程序。 (异常来自 HRESULT:0x8007000B)
+   在 System.Data.SQLite.UnsafeNativeMethods.sqlite3_config_none(SQLiteConfigOpsEnum op)
+   在 System.Data.SQLite.SQLite3.StaticIsInitialized()
+   在 System.Data.SQLite.SQLiteLog.Initialize()
+   在 System.Data.SQLite.SQLiteConnection..ctor(String connectionString, Boolean parseViaFramework)
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 99
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 18:29:48] version 1.3
+[2015-01-16 18:29:48] 开启端口服务....
+[2015-01-16 18:29:48] 本地节点：192.168.2.135:18008
+[2015-01-16 18:29:48] 等待连接.....
+[2015-01-16 18:29:51] System.BadImageFormatException: 试图加载格式不正确的程序。 (异常来自 HRESULT:0x8007000B)
+   在 System.Data.SQLite.UnsafeNativeMethods.sqlite3_config_none(SQLiteConfigOpsEnum op)
+   在 System.Data.SQLite.SQLite3.StaticIsInitialized()
+   在 System.Data.SQLite.SQLiteLog.Initialize()
+   在 System.Data.SQLite.SQLiteConnection..ctor(String connectionString, Boolean parseViaFramework)
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 99
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 18:30:42] version 1.3
+[2015-01-16 18:30:42] 开启端口服务....
+[2015-01-16 18:30:42] 本地节点：192.168.2.135:18008
+[2015-01-16 18:30:42] 等待连接.....
+[2015-01-16 18:30:44] System.BadImageFormatException: 试图加载格式不正确的程序。 (异常来自 HRESULT:0x8007000B)
+   在 System.Data.SQLite.UnsafeNativeMethods.sqlite3_config_none(SQLiteConfigOpsEnum op)
+   在 System.Data.SQLite.SQLite3.StaticIsInitialized()
+   在 System.Data.SQLite.SQLiteLog.Initialize()
+   在 System.Data.SQLite.SQLiteConnection..ctor(String connectionString, Boolean parseViaFramework)
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 99
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 18:31:49] version 1.3
+[2015-01-16 18:31:49] 开启端口服务....
+[2015-01-16 18:31:49] 本地节点：192.168.2.135:18008
+[2015-01-16 18:31:49] 等待连接.....
+[2015-01-16 18:31:52] System.BadImageFormatException: 试图加载格式不正确的程序。 (异常来自 HRESULT:0x8007000B)
+   在 System.Data.SQLite.UnsafeNativeMethods.sqlite3_config_none(SQLiteConfigOpsEnum op)
+   在 System.Data.SQLite.SQLite3.StaticIsInitialized()
+   在 System.Data.SQLite.SQLiteLog.Initialize()
+   在 System.Data.SQLite.SQLiteConnection..ctor(String connectionString, Boolean parseViaFramework)
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 99
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 18:38:35] version 1.3
+[2015-01-16 18:38:35] 开启端口服务....
+[2015-01-16 18:38:35] 本地节点：192.168.2.135:18008
+[2015-01-16 18:38:35] 等待连接.....
+[2015-01-16 18:38:39] System.BadImageFormatException: 试图加载格式不正确的程序。 (异常来自 HRESULT:0x8007000B)
+   在 System.Data.SQLite.UnsafeNativeMethods.sqlite3_config_none(SQLiteConfigOpsEnum op)
+   在 System.Data.SQLite.SQLite3.StaticIsInitialized()
+   在 System.Data.SQLite.SQLiteLog.Initialize()
+   在 System.Data.SQLite.SQLiteConnection..ctor(String connectionString, Boolean parseViaFramework)
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 99
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 18:41:57] version 1.3
+[2015-01-16 18:41:57] 开启端口服务....
+[2015-01-16 18:41:57] 本地节点：192.168.2.135:18008
+[2015-01-16 18:41:57] 等待连接.....
+[2015-01-16 18:41:59] System.BadImageFormatException: 试图加载格式不正确的程序。 (异常来自 HRESULT:0x8007000B)
+   在 System.Data.SQLite.UnsafeNativeMethods.sqlite3_config_none(SQLiteConfigOpsEnum op)
+   在 System.Data.SQLite.SQLite3.StaticIsInitialized()
+   在 System.Data.SQLite.SQLiteLog.Initialize()
+   在 System.Data.SQLite.SQLiteConnection..ctor(String connectionString, Boolean parseViaFramework)
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 99
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 18:42:30] version 1.3
+[2015-01-16 18:42:30] 开启端口服务....
+[2015-01-16 18:42:30] 本地节点：192.168.2.135:18008
+[2015-01-16 18:42:30] 等待连接.....
+[2015-01-16 18:42:32] System.BadImageFormatException: 试图加载格式不正确的程序。 (异常来自 HRESULT:0x8007000B)
+   在 System.Data.SQLite.UnsafeNativeMethods.sqlite3_config_none(SQLiteConfigOpsEnum op)
+   在 System.Data.SQLite.SQLite3.StaticIsInitialized()
+   在 System.Data.SQLite.SQLiteLog.Initialize()
+   在 System.Data.SQLite.SQLiteConnection..ctor(String connectionString, Boolean parseViaFramework)
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 99
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 18:46:36] version 1.3
+[2015-01-16 18:46:36] 开启端口服务....
+[2015-01-16 18:46:36] 本地节点：192.168.2.135:18008
+[2015-01-16 18:46:36] 等待连接.....
+[2015-01-16 18:46:39] System.TypeInitializationException: “Mono.Data.Sqlite.SqliteConvert”的类型初始值设定项引发异常。 ---> System.ArgumentException: 值不在预期的范围内。
+   在 System.Runtime.CompilerServices.RuntimeHelpers.InitializeArray(Array array, RuntimeFieldHandle fldHandle)
+   在 Mono.Data.Sqlite.SqliteConvert..cctor()
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Mono.Data.Sqlite.SqliteConvert.Split(String source, Char separator)
+   在 Mono.Data.Sqlite.SqliteConnection.ParseConnectionString(String connectionString)
+   在 Mono.Data.Sqlite.SqliteConnection.Open()
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 101
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 18:49:15] version 1.3
+[2015-01-16 18:49:15] 开启端口服务....
+[2015-01-16 18:49:15] 本地节点：192.168.2.135:18008
+[2015-01-16 18:49:15] 等待连接.....
+[2015-01-16 18:50:26] System.TypeInitializationException: “Mono.Data.Sqlite.SqliteConvert”的类型初始值设定项引发异常。 ---> System.ArgumentException: 值不在预期的范围内。
+   在 System.Runtime.CompilerServices.RuntimeHelpers.InitializeArray(Array array, RuntimeFieldHandle fldHandle)
+   在 Mono.Data.Sqlite.SqliteConvert..cctor()
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Mono.Data.Sqlite.SqliteConvert.Split(String source, Char separator)
+   在 Mono.Data.Sqlite.SqliteConnection.ParseConnectionString(String connectionString)
+   在 Mono.Data.Sqlite.SqliteConnection.Open()
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 101
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 18:51:07] version 1.3
+[2015-01-16 18:51:07] 开启端口服务....
+[2015-01-16 18:51:07] 本地节点：192.168.2.135:18008
+[2015-01-16 18:51:07] 等待连接.....
+[2015-01-16 18:53:27] System.TypeInitializationException: “Mono.Data.Sqlite.SqliteConvert”的类型初始值设定项引发异常。 ---> System.ArgumentException: 值不在预期的范围内。
+   在 System.Runtime.CompilerServices.RuntimeHelpers.InitializeArray(Array array, RuntimeFieldHandle fldHandle)
+   在 Mono.Data.Sqlite.SqliteConvert..cctor()
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Mono.Data.Sqlite.SqliteConvert.Split(String source, Char separator)
+   在 Mono.Data.Sqlite.SqliteConnection.ParseConnectionString(String connectionString)
+   在 Mono.Data.Sqlite.SqliteConnection.Open()
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 101
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 18:56:03] version 1.3
+[2015-01-16 18:56:03] 开启端口服务....
+[2015-01-16 18:56:03] 本地节点：192.168.2.135:18008
+[2015-01-16 18:56:03] 等待连接.....
+[2015-01-16 18:56:05] System.TypeInitializationException: “Mono.Data.Sqlite.SqliteConvert”的类型初始值设定项引发异常。 ---> System.ArgumentException: 值不在预期的范围内。
+   在 System.Runtime.CompilerServices.RuntimeHelpers.InitializeArray(Array array, RuntimeFieldHandle fldHandle)
+   在 Mono.Data.Sqlite.SqliteConvert..cctor()
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Mono.Data.Sqlite.SqliteConvert.Split(String source, Char separator)
+   在 Mono.Data.Sqlite.SqliteConnection.ParseConnectionString(String connectionString)
+   在 Mono.Data.Sqlite.SqliteConnection.Open()
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 101
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 18:57:50] version 1.3
+[2015-01-16 18:57:50] 开启端口服务....
+[2015-01-16 18:57:50] 本地节点：192.168.2.135:18008
+[2015-01-16 18:57:50] 等待连接.....
+[2015-01-16 18:57:53] System.TypeInitializationException: “Mono.Data.Sqlite.SqliteConvert”的类型初始值设定项引发异常。 ---> System.ArgumentException: 值不在预期的范围内。
+   在 System.Runtime.CompilerServices.RuntimeHelpers.InitializeArray(Array array, RuntimeFieldHandle fldHandle)
+   在 Mono.Data.Sqlite.SqliteConvert..cctor()
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Mono.Data.Sqlite.SqliteConvert.Split(String source, Char separator)
+   在 Mono.Data.Sqlite.SqliteConnection.ParseConnectionString(String connectionString)
+   在 Mono.Data.Sqlite.SqliteConnection.Open()
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 102
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 19:04:19] version 1.3
+[2015-01-16 19:04:19] 开启端口服务....
+[2015-01-16 19:04:19] 本地节点：192.168.2.135:18008
+[2015-01-16 19:04:19] 等待连接.....
+[2015-01-16 19:04:22] System.TypeInitializationException: “Mono.Data.Sqlite.SqliteConvert”的类型初始值设定项引发异常。 ---> System.ArgumentException: 值不在预期的范围内。
+   在 System.Runtime.CompilerServices.RuntimeHelpers.InitializeArray(Array array, RuntimeFieldHandle fldHandle)
+   在 Mono.Data.Sqlite.SqliteConvert..cctor()
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Mono.Data.Sqlite.SqliteConvert.Split(String source, Char separator)
+   在 Mono.Data.Sqlite.SqliteConnection.ParseConnectionString(String connectionString)
+   在 Mono.Data.Sqlite.SqliteConnection.Open()
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 102
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 19:14:17] version 1.3
+[2015-01-16 19:14:17] 开启端口服务....
+[2015-01-16 19:14:17] 本地节点：192.168.2.135:18008
+[2015-01-16 19:14:17] 等待连接.....
+[2015-01-16 19:15:37] System.TypeInitializationException: “Mono.Data.Sqlite.SqliteConvert”的类型初始值设定项引发异常。 ---> System.ArgumentException: 值不在预期的范围内。
+   在 System.Runtime.CompilerServices.RuntimeHelpers.InitializeArray(Array array, RuntimeFieldHandle fldHandle)
+   在 Mono.Data.Sqlite.SqliteConvert..cctor()
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Mono.Data.Sqlite.SqliteConvert.Split(String source, Char separator)
+   在 Mono.Data.Sqlite.SqliteConnection.ParseConnectionString(String connectionString)
+   在 Mono.Data.Sqlite.SqliteConnection.Open()
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 102
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 19:16:33] version 1.3
+[2015-01-16 19:16:33] 开启端口服务....
+[2015-01-16 19:16:33] 本地节点：192.168.2.135:18008
+[2015-01-16 19:16:33] 等待连接.....
+[2015-01-16 19:16:37] System.TypeInitializationException: “Mono.Data.Sqlite.SqliteConvert”的类型初始值设定项引发异常。 ---> System.ArgumentException: 值不在预期的范围内。
+   在 System.Runtime.CompilerServices.RuntimeHelpers.InitializeArray(Array array, RuntimeFieldHandle fldHandle)
+   在 Mono.Data.Sqlite.SqliteConvert..cctor()
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Mono.Data.Sqlite.SqliteConvert.Split(String source, Char separator)
+   在 Mono.Data.Sqlite.SqliteConnection.ParseConnectionString(String connectionString)
+   在 Mono.Data.Sqlite.SqliteConnection.Open()
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 102
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 19:17:48] version 1.3
+[2015-01-16 19:17:48] 开启端口服务....
+[2015-01-16 19:17:48] 本地节点：192.168.2.135:18008
+[2015-01-16 19:17:48] 等待连接.....
+[2015-01-16 19:17:49] System.TypeInitializationException: “Mono.Data.Sqlite.SqliteConvert”的类型初始值设定项引发异常。 ---> System.ArgumentException: 值不在预期的范围内。
+   在 System.Runtime.CompilerServices.RuntimeHelpers.InitializeArray(Array array, RuntimeFieldHandle fldHandle)
+   在 Mono.Data.Sqlite.SqliteConvert..cctor()
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Mono.Data.Sqlite.SqliteConvert.Split(String source, Char separator)
+   在 Mono.Data.Sqlite.SqliteConnection.ParseConnectionString(String connectionString)
+   在 Mono.Data.Sqlite.SqliteConnection.Open()
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 102
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 19:26:12] version 1.3
+[2015-01-16 19:26:12] 开启端口服务....
+[2015-01-16 19:26:12] 本地节点：192.168.2.135:18008
+[2015-01-16 19:26:12] 等待连接.....
+[2015-01-16 19:26:15] System.TypeInitializationException: “Mono.Data.Sqlite.SqliteConvert”的类型初始值设定项引发异常。 ---> System.ArgumentException: 值不在预期的范围内。
+   在 System.Runtime.CompilerServices.RuntimeHelpers.InitializeArray(Array array, RuntimeFieldHandle fldHandle)
+   在 Mono.Data.Sqlite.SqliteConvert..cctor()
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Mono.Data.Sqlite.SqliteConvert.Split(String source, Char separator)
+   在 Mono.Data.Sqlite.SqliteConnection.ParseConnectionString(String connectionString)
+   在 Mono.Data.Sqlite.SqliteConnection.Open()
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 102
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 19:44:12] version 1.3
+[2015-01-16 19:44:12] 开启端口服务....
+[2015-01-16 19:44:12] 本地节点：192.168.2.135:18008
+[2015-01-16 19:44:12] 等待连接.....
+[2015-01-16 19:44:15] System.TypeInitializationException: “Mono.Data.Sqlite.SqliteConvert”的类型初始值设定项引发异常。 ---> System.ArgumentException: 值不在预期的范围内。
+   在 System.Runtime.CompilerServices.RuntimeHelpers.InitializeArray(Array array, RuntimeFieldHandle fldHandle)
+   在 Mono.Data.Sqlite.SqliteConvert..cctor()
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Mono.Data.Sqlite.SqliteConvert.Split(String source, Char separator)
+   在 Mono.Data.Sqlite.SqliteConnection.ParseConnectionString(String connectionString)
+   在 Mono.Data.Sqlite.SqliteConnection.Open()
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 102
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 19:47:56] version 1.3
+[2015-01-16 19:47:56] 开启端口服务....
+[2015-01-16 19:47:56] 本地节点：192.168.2.135:18008
+[2015-01-16 19:47:56] 等待连接.....
+[2015-01-16 19:47:59] System.BadImageFormatException: 试图加载格式不正确的程序。 (异常来自 HRESULT:0x8007000B)
+   在 System.Data.SQLite.UnsafeNativeMethods.sqlite3_config_none(SQLiteConfigOpsEnum op)
+   在 System.Data.SQLite.SQLite3.StaticIsInitialized()
+   在 System.Data.SQLite.SQLiteLog.Initialize()
+   在 System.Data.SQLite.SQLiteConnection..ctor(String connectionString, Boolean parseViaFramework)
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 101
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 19:49:02] version 1.3
+[2015-01-16 19:49:02] 开启端口服务....
+[2015-01-16 19:49:02] 本地节点：192.168.2.135:18008
+[2015-01-16 19:49:02] 等待连接.....
+[2015-01-16 19:49:05] System.BadImageFormatException: 试图加载格式不正确的程序。 (异常来自 HRESULT:0x8007000B)
+   在 System.Data.SQLite.UnsafeNativeMethods.sqlite3_config_none(SQLiteConfigOpsEnum op)
+   在 System.Data.SQLite.SQLite3.StaticIsInitialized()
+   在 System.Data.SQLite.SQLiteLog.Initialize()
+   在 System.Data.SQLite.SQLiteConnection..ctor(String connectionString, Boolean parseViaFramework)
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 101
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 19:58:42] version 1.3
+[2015-01-16 19:58:42] 开启端口服务....
+[2015-01-16 19:58:42] 本地节点：192.168.2.135:18008
+[2015-01-16 19:58:42] 等待连接.....
+[2015-01-16 19:58:45] System.TypeInitializationException: “Mono.Data.Sqlite.SqliteConvert”的类型初始值设定项引发异常。 ---> System.ArgumentException: 值不在预期的范围内。
+   在 System.Runtime.CompilerServices.RuntimeHelpers.InitializeArray(Array array, RuntimeFieldHandle fldHandle)
+   在 Mono.Data.Sqlite.SqliteConvert..cctor()
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Mono.Data.Sqlite.SqliteConvert.Split(String source, Char separator)
+   在 Mono.Data.Sqlite.SqliteConnection.ParseConnectionString(String connectionString)
+   在 Mono.Data.Sqlite.SqliteConnection.Open()
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 102
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 20:04:09] version 1.3
+[2015-01-16 20:04:09] 开启端口服务....
+[2015-01-16 20:04:09] 本地节点：192.168.2.135:18008
+[2015-01-16 20:04:09] 等待连接.....
+[2015-01-16 20:04:11] System.DllNotFoundException: 无法加载 DLL“SQLite.Interop.dll”: 找不到指定的模块。 (异常来自 HRESULT:0x8007007E)。
+   在 System.Data.SQLite.UnsafeNativeMethods.sqlite3_config_none(SQLiteConfigOpsEnum op)
+   在 System.Data.SQLite.SQLite3.StaticIsInitialized()
+   在 System.Data.SQLite.SQLiteLog.Initialize()
+   在 System.Data.SQLite.SQLiteConnection..ctor(String connectionString, Boolean parseViaFramework)
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 159
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 20:04:29] version 1.3
+[2015-01-16 20:04:29] 开启端口服务....
+[2015-01-16 20:04:29] 本地节点：192.168.2.135:18008
+[2015-01-16 20:04:29] 等待连接.....
+[2015-01-16 20:05:56] version 1.3
+[2015-01-16 20:05:57] 开启端口服务....
+[2015-01-16 20:05:57] 本地节点：192.168.2.135:18008
+[2015-01-16 20:05:57] 等待连接.....
+[2015-01-16 20:05:58] System.Data.SQLite.SQLiteException: constraint failed
+UNIQUE constraint failed: permissions.repository, permissions.path, permissions.subjecttype, permissions.subjectid
+   在 System.Data.SQLite.SQLite3.Reset(SQLiteStatement stmt)
+   在 System.Data.SQLite.SQLite3.Step(SQLiteStatement stmt)
+   在 System.Data.SQLite.SQLiteDataReader.NextResult()
+   在 System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   在 System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.SQLite.SQLiteCommand.ExecuteNonQuery(CommandBehavior behavior)
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 199
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 20:07:22] version 1.3
+[2015-01-16 20:07:22] 开启端口服务....
+[2015-01-16 20:07:22] 本地节点：192.168.2.135:18008
+[2015-01-16 20:07:22] 等待连接.....
+[2015-01-16 20:07:27] System.Data.SQLite.SQLiteException: constraint failed
+UNIQUE constraint failed: permissions.repository, permissions.path, permissions.subjecttype, permissions.subjectid
+   在 System.Data.SQLite.SQLite3.Reset(SQLiteStatement stmt)
+   在 System.Data.SQLite.SQLite3.Step(SQLiteStatement stmt)
+   在 System.Data.SQLite.SQLiteDataReader.NextResult()
+   在 System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   在 System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.SQLite.SQLiteCommand.ExecuteNonQuery(CommandBehavior behavior)
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 199
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 20:08:05] version 1.3
+[2015-01-16 20:08:05] 开启端口服务....
+[2015-01-16 20:08:05] 本地节点：192.168.2.135:18008
+[2015-01-16 20:08:05] 等待连接.....
+[2015-01-16 20:08:07] System.Data.SQLite.SQLiteException: constraint failed
+UNIQUE constraint failed: permissions.repository, permissions.path, permissions.subjecttype, permissions.subjectid
+   在 System.Data.SQLite.SQLite3.Reset(SQLiteStatement stmt)
+   在 System.Data.SQLite.SQLite3.Step(SQLiteStatement stmt)
+   在 System.Data.SQLite.SQLiteDataReader.NextResult()
+   在 System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   在 System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.SQLite.SQLiteCommand.ExecuteNonQuery(CommandBehavior behavior)
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 198
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 20:08:25] version 1.3
+[2015-01-16 20:08:25] 开启端口服务....
+[2015-01-16 20:08:25] 本地节点：192.168.2.135:18008
+[2015-01-16 20:08:25] 等待连接.....
+[2015-01-16 20:08:27] System.Data.SQLite.SQLiteException: constraint failed
+UNIQUE constraint failed: permissions.repository, permissions.path, permissions.subjecttype, permissions.subjectid
+   在 System.Data.SQLite.SQLite3.Reset(SQLiteStatement stmt)
+   在 System.Data.SQLite.SQLite3.Step(SQLiteStatement stmt)
+   在 System.Data.SQLite.SQLiteDataReader.NextResult()
+   在 System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   在 System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.SQLite.SQLiteCommand.ExecuteNonQuery(CommandBehavior behavior)
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 198
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 20:08:38] version 1.3
+[2015-01-16 20:08:38] 开启端口服务....
+[2015-01-16 20:08:38] 本地节点：192.168.2.135:18008
+[2015-01-16 20:08:38] 等待连接.....
+[2015-01-16 20:08:40] System.Data.SQLite.SQLiteException: constraint failed
+UNIQUE constraint failed: permissions.repository, permissions.path, permissions.subjecttype, permissions.subjectid
+   在 System.Data.SQLite.SQLite3.Reset(SQLiteStatement stmt)
+   在 System.Data.SQLite.SQLite3.Step(SQLiteStatement stmt)
+   在 System.Data.SQLite.SQLiteDataReader.NextResult()
+   在 System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   在 System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.SQLite.SQLiteCommand.ExecuteNonQuery(CommandBehavior behavior)
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 198
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 54
+[2015-01-16 20:09:42] version 1.3
+[2015-01-16 20:09:42] 开启端口服务....
+[2015-01-16 20:09:42] 本地节点：192.168.2.135:18008
+[2015-01-16 20:09:42] 等待连接.....
+[2015-01-16 20:09:45] System.Data.SQLite.SQLiteException: constraint failed
+UNIQUE constraint failed: permissions.repository, permissions.path, permissions.subjecttype, permissions.subjectid
+   在 System.Data.SQLite.SQLite3.Reset(SQLiteStatement stmt)
+   在 System.Data.SQLite.SQLite3.Step(SQLiteStatement stmt)
+   在 System.Data.SQLite.SQLiteDataReader.NextResult()
+   在 System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   在 System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.SQLite.SQLiteCommand.ExecuteNonQuery(CommandBehavior behavior)
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 198
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 52
+[2015-01-16 20:10:34] version 1.3
+[2015-01-16 20:10:34] 开启端口服务....
+[2015-01-16 20:10:34] 本地节点：192.168.2.135:18008
+[2015-01-16 20:10:34] 等待连接.....
+[2015-01-16 20:10:51] System.Data.SQLite.SQLiteException: constraint failed
+UNIQUE constraint failed: permissions.repository, permissions.path, permissions.subjecttype, permissions.subjectid
+   在 System.Data.SQLite.SQLite3.Reset(SQLiteStatement stmt)
+   在 System.Data.SQLite.SQLite3.Step(SQLiteStatement stmt)
+   在 System.Data.SQLite.SQLiteDataReader.NextResult()
+   在 System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   在 System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.SQLite.SQLiteCommand.ExecuteNonQuery(CommandBehavior behavior)
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 200
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 52
+[2015-01-16 20:16:12] version 1.3
+[2015-01-16 20:16:12] 开启端口服务....
+[2015-01-16 20:16:12] 本地节点：192.168.2.135:18008
+[2015-01-16 20:16:12] 等待连接.....
+[2015-01-16 20:17:47] version 1.3
+[2015-01-16 20:17:48] 开启端口服务....
+[2015-01-16 20:17:48] 本地节点：192.168.2.135:18008
+[2015-01-16 20:17:48] 等待连接.....
+[2015-01-16 20:18:44] version 1.3
+[2015-01-16 20:18:44] 开启端口服务....
+[2015-01-16 20:18:44] 本地节点：192.168.2.135:18008
+[2015-01-16 20:18:44] 等待连接.....
+[2015-01-16 20:18:57] version 1.3
+[2015-01-16 20:18:57] 开启端口服务....
+[2015-01-16 20:18:57] 本地节点：192.168.2.135:18008
+[2015-01-16 20:18:57] 等待连接.....
+[2015-01-16 20:19:02] System.DllNotFoundException: 无法加载 DLL“SQLite.Interop.dll”: 找不到指定的模块。 (异常来自 HRESULT:0x8007007E)。
+   在 System.Data.SQLite.UnsafeNativeMethods.sqlite3_config_none(SQLiteConfigOpsEnum op)
+   在 System.Data.SQLite.SQLite3.StaticIsInitialized()
+   在 System.Data.SQLite.SQLiteLog.Initialize()
+   在 System.Data.SQLite.SQLiteConnection..ctor(String connectionString, Boolean parseViaFramework)
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 158
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 52
+[2015-01-16 20:19:40] version 1.3
+[2015-01-16 20:19:40] 开启端口服务....
+[2015-01-16 20:19:40] 本地节点：192.168.2.135:18008
+[2015-01-16 20:19:40] 等待连接.....
+[2015-01-16 20:23:01] version 1.3
+[2015-01-16 20:23:01] 开启端口服务....
+[2015-01-16 20:23:01] 本地节点：192.168.2.135:18008
+[2015-01-16 20:23:01] 等待连接.....
+[2015-01-16 20:23:31] version 1.3
+[2015-01-16 20:23:31] 开启端口服务....
+[2015-01-16 20:23:31] 本地节点：192.168.2.135:18008
+[2015-01-16 20:23:31] 等待连接.....
+[2015-01-16 20:32:06] version 1.3
+[2015-01-16 20:32:06] 开启端口服务....
+[2015-01-16 20:32:06] 本地节点：192.168.2.135:18008
+[2015-01-16 20:32:06] 等待连接.....
+[2015-01-16 20:32:10] System.Data.SQLite.SQLiteException: constraint failed
+UNIQUE constraint failed: permissions.repository, permissions.path, permissions.subjecttype, permissions.subjectid
+   在 System.Data.SQLite.SQLite3.Reset(SQLiteStatement stmt)
+   在 System.Data.SQLite.SQLite3.Step(SQLiteStatement stmt)
+   在 System.Data.SQLite.SQLiteDataReader.NextResult()
+   在 System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   在 System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.SQLite.SQLiteCommand.ExecuteNonQuery(CommandBehavior behavior)
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 200
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 52
+[2015-01-17 14:54:10] version 1.3
+[2015-01-17 14:54:10] 开启端口服务....
+[2015-01-17 14:54:10] 本地节点：192.168.2.135:18008
+[2015-01-17 14:54:10] 等待连接.....
+[2015-01-17 14:54:16] System.Data.SQLite.SQLiteException: constraint failed
+UNIQUE constraint failed: permissions.repository, permissions.path, permissions.subjecttype, permissions.subjectid
+   在 System.Data.SQLite.SQLite3.Reset(SQLiteStatement stmt)
+   在 System.Data.SQLite.SQLite3.Step(SQLiteStatement stmt)
+   在 System.Data.SQLite.SQLiteDataReader.NextResult()
+   在 System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   在 System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.SQLite.SQLiteCommand.ExecuteNonQuery(CommandBehavior behavior)
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strProject, String srcSrcBranch, String strDstBranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 200
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 52
+[2015-01-17 14:57:39] version 1.3
+[2015-01-17 14:57:39] 开启端口服务....
+[2015-01-17 14:57:39] 本地节点：192.168.2.135:18008
+[2015-01-17 14:57:39] 等待连接.....
+[2015-01-17 15:01:28] version 1.3
+[2015-01-17 15:01:28] 开启端口服务....
+[2015-01-17 15:01:28] 本地节点：192.168.2.135:18008
+[2015-01-17 15:01:28] 等待连接.....
+[2015-01-17 15:01:43] version 1.3
+[2015-01-17 15:01:43] Error:通常每个套接字地址(协议/网络地址/端口)只允许使用一次。
+[2015-01-17 15:02:44] 来自[192.168.2.135]的用户[PENGPENG], 请求建立分支:xx, 选择的版本是:/game
+[2015-01-17 15:03:16] IP:192.168.2.135, User:PENGPENG
+[2015-01-17 15:03:16] https://192.168.2.135/gunsoul_mobile/game/
+[2015-01-17 15:03:16] https://192.168.2.135/gunsoul_mobile/branches/autobranch/a0559_
+[2015-01-17 15:03:16] xx
+[2015-01-17 15:03:16] cp -m "create branch" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" https://192.168.2.135/gunsoul_mobile/game/ https://192.168.2.135/gunsoul_mobile/branches/autobranch/a0559_xx
+[2015-01-17 15:03:53] 建立分支结果为:创建分支[xx]失败！原因：
+Process Dead Lock, wait time out.
+svn参数：cp -m "create branch" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" https://192.168.2.135/gunsoul_mobile/game/ https://192.168.2.135/gunsoul_mobile/branches/autobranch/a0559_xx
+[2015-01-17 15:05:42] version 1.3
+[2015-01-17 15:05:42] 开启端口服务....
+[2015-01-17 15:05:42] 本地节点：192.168.2.135:18008
+[2015-01-17 15:05:42] 等待连接.....
+[2015-01-17 15:06:04] version 1.3
+[2015-01-17 15:06:04] 开启端口服务....
+[2015-01-17 15:06:04] 本地节点：192.168.2.135:18008
+[2015-01-17 15:06:04] 等待连接.....
+[2015-01-17 15:09:10] 来自[192.168.2.135]的用户[PENGPENG], 请求建立分支:xx, 选择的版本是:/arts
+[2015-01-17 15:11:05] 建立分支结果为:WARNING:no result!
+[2015-01-17 15:14:44] version 1.3
+[2015-01-17 15:14:44] 开启端口服务....
+[2015-01-17 15:14:44] 本地节点：192.168.2.135:18008
+[2015-01-17 15:14:44] 等待连接.....
+[2015-01-17 15:15:16] 来自[192.168.2.135]的用户[PENGPENG], 请求建立分支:xx, 选择的版本是:/arts
+[2015-01-17 15:15:53] 建立分支结果为:WARNING:no result!
+[2015-01-17 15:22:24] version 1.3
+[2015-01-17 15:22:24] 开启端口服务....
+[2015-01-17 15:22:24] 本地节点：192.168.2.135:18008
+[2015-01-17 15:22:24] 等待连接.....
+[2015-01-17 15:22:28] 来自[192.168.2.135]的用户[PENGPENG], 请求建立分支:xx, 选择的版本是:/arts
+[2015-01-17 15:22:28] IP:192.168.2.135, User:PENGPENG
+[2015-01-17 15:22:28] https://192.168.2.135/gunsoul_mobile/arts/
+[2015-01-17 15:22:28] https://192.168.2.135/gunsoul_mobile/branches/autobranch/a0563_
+[2015-01-17 15:22:28] xx
+[2015-01-17 15:22:28] cp -m "create branch" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" https://192.168.2.135/gunsoul_mobile/arts/ https://192.168.2.135/gunsoul_mobile/branches/autobranch/a0563_xx
+[2015-01-17 15:22:34] 建立分支结果为:创建分支[xx]失败！原因：
+Process Dead Lock, wait time out.
+svn参数：cp -m "create branch" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" https://192.168.2.135/gunsoul_mobile/arts/ https://192.168.2.135/gunsoul_mobile/branches/autobranch/a0563_xx
+[2015-01-17 15:23:23] version 1.3
+[2015-01-17 15:23:23] 开启端口服务....
+[2015-01-17 15:23:23] 本地节点：192.168.2.135:18008
+[2015-01-17 15:23:23] 等待连接.....
+[2015-01-17 15:23:24] 来自[192.168.2.135]的用户[PENGPENG], 请求建立分支:xx, 选择的版本是:/arts
+[2015-01-17 15:23:25] 建立分支结果为:WARNING:创建分支成功，但是复制权限失败，有可能是数据库里面有重置的字段。
+[2015-01-17 15:31:27] version 1.3
+[2015-01-17 15:31:27] 开启端口服务....
+[2015-01-17 15:31:27] 本地节点：192.168.2.135:18008
+[2015-01-17 15:31:27] 等待连接.....
+[2015-01-17 15:31:45] 来自[192.168.2.135]的用户[PENGPENG], 请求建立主分支:xx, 选择的版本是:/arts
+[2015-01-17 15:32:01] IP:192.168.2.135, User:PENGPENG
+[2015-01-17 15:32:02] svn cp -m "create root" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" https://192.168.2.135/gunsoul_mobile/arts/ https://192.168.2.135/gunsoul_mobile/xx/
+[2015-01-17 15:34:16] 建立分支结果为:WARNING:创建分支成功，但是复制权限失败，有可能是权限管理数据库里面有重置的字段。项目：gunsoul_mobile，源库：xx，目标库：/arts
+[2015-01-17 15:37:16] version 1.3
+[2015-01-17 15:37:16] 开启端口服务....
+[2015-01-17 15:37:16] 本地节点：192.168.2.135:18008
+[2015-01-17 15:37:16] 等待连接.....
+[2015-01-17 15:37:28] 来自[192.168.2.135]的用户[PENGPENG], 请求建立主分支:xx, 选择的版本是:/arts
+[2015-01-17 15:37:28] IP:192.168.2.135, User:PENGPENG
+[2015-01-17 15:37:28] svn cp -m "create root" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" https://192.168.2.135/gunsoul_mobile/arts/ https://192.168.2.135/gunsoul_mobile/xx/
+[2015-01-17 15:37:28] 建立分支结果为:WARNING:创建分支成功，但是复制权限失败，有可能是权限管理数据库里面源库不存在或者有重置的目标库。项目：gunsoul_mobile，源库：/arts，目标库：/xx
+[2015-01-17 15:38:44] version 1.3
+[2015-01-17 15:38:44] 开启端口服务....
+[2015-01-17 15:38:44] 本地节点：192.168.2.135:18008
+[2015-01-17 15:38:44] 等待连接.....
+[2015-01-17 15:38:48] 来自[192.168.2.135]的用户[PENGPENG], 请求建立主分支:xx, 选择的版本是:/arts
+[2015-01-17 15:38:48] IP:192.168.2.135, User:PENGPENG
+[2015-01-17 15:38:48] svn cp -m "create root" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" https://192.168.2.135/gunsoul_mobile/arts/ https://192.168.2.135/gunsoul_mobile/xx/
+[2015-01-17 15:38:48] 建立分支结果为:创建分支[xx]成功！具体地址:
+https://192.168.2.135/gunsoul_mobile/xx/
+

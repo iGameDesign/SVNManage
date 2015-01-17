@@ -48,24 +48,25 @@
                         int num = socket.Receive(buffer);
                         string[] strArray = unicode.GetString(buffer).Trim("\0".ToCharArray()).Split(new string[] { "\t" }, StringSplitOptions.RemoveEmptyEntries);
                         string format = "Success";
+
                         if (strArray[0] == "getRightsBranches")
                         {
                             log(string.Format("来自[{0}]的用户[{1}], 请求建立查询未关闭分支", socket.RemoteEndPoint, strArray[1]), ConsoleColor.Magenta);
                             mgr.m_svndb = strArray[2];
                             format = mgr.getRightsBranches(strArray[2]);
                         }
-                        // 获取所有处于控制下的分支
-						else if (strArray[0] == "getroots")
-						{
+                        // 获取所有处于控制下的主分支
+                        else if (strArray[0] == "getroots")
+                        {
                             mgr.m_svndb = strArray[1];
                             format = mgr.getRoots(strArray[1]);
-						}
-						else if (strArray[0] == "getlockstatu")
-						{
-							log(string.Format("来自[{0}]的用户[{1}], 请求查询分支锁定状态", socket.RemoteEndPoint, strArray[1]), ConsoleColor.Magenta);
+                        }
+                        else if (strArray[0] == "getlockstatu")
+                        {
+                            log(string.Format("来自[{0}]的用户[{1}], 请求查询分支锁定状态", socket.RemoteEndPoint, strArray[1]), ConsoleColor.Magenta);
                             mgr.m_svndb = strArray[3];
                             format = mgr.getLockStatu(strArray[3]) ? "1" : "0";
-						}
+                        }
                         // 获取被锁定的分支ID [Add by pp: 2014-09-18]
                         else if (strArray[0] == "getlockstatus")
                         {
@@ -73,20 +74,20 @@
                             mgr.m_svndb = strArray[3];
                             format = mgr.getLockStatus(strArray[3]);
                         }
-						else if (strArray[0] == "login")
-						{
+                        else if (strArray[0] == "login")
+                        {
                             //bool flag2 = strArray[2] == "5cf0c953776a862fc7b992625fc8c9d";
                             bool flag2 = strArray[2] == mgr.m_strToken;
                             mgr.m_svndb = strArray[3];
                             log(string.Format("来自[{0}]的用户[{1}], 请求登录,　请求密钥为:{2}, 操作的库为{3}", socket.RemoteEndPoint, strArray[1], strArray[2], strArray[3]), ConsoleColor.Magenta);
-							format = flag2 ? "登录成功" : " 登录失败";
-							log(string.Format(format, new object[0]), ConsoleColor.Cyan);
-						}
-						else if (strArray[0] == "lockmasterbranch")
-						{
+                            format = flag2 ? "登录成功" : " 登录失败";
+                            log(string.Format(format, new object[0]), ConsoleColor.Cyan);
+                        }
+                        else if (strArray[0] == "lockmasterbranch")
+                        {
                             //mgr.m_svndb = strArray[3];
-							mgr.ProcessLockBranch(socket.RemoteEndPoint.ToString(), strArray[2], int.Parse(strArray[2]) == 1, ref format);
-						}
+                            mgr.ProcessLockBranch(socket.RemoteEndPoint.ToString(), strArray[2], int.Parse(strArray[2]) == 1, ref format);
+                        }
                         // 设置分支的锁定状态 [Add by pp: 2014-09-18]
                         else if (strArray[0] == "lockbranches")
                         {
@@ -94,24 +95,24 @@
                             mgr.m_svndb = strArray[3];
                             mgr.setLockStatus(strArray[2], strArray[3]);
                         }
-						else if (strArray[0] == "createroot")
-						{
+                        else if (strArray[0] == "createroot")
+                        {
                             mgr.m_svndb = strArray[5];
-							log(string.Format("来自[{0}]的用户[{1}], 请求建立主分支:{2}, 选择的版本是:{3}", strArray[1], strArray[2], strArray[3], strArray[4]), ConsoleColor.Cyan);
+                            log(string.Format("来自[{0}]的用户[{1}], 请求建立主分支:{2}, 选择的版本是:{3}", strArray[1], strArray[2], strArray[3], strArray[4]), ConsoleColor.Cyan);
                             format = mgr.CreateRoot(strArray[1], strArray[2], strArray[3], strArray[4], strArray[5]);
-							log(string.Format("建立分支结果为:{0}", format), ConsoleColor.Cyan);
-						}
-						else if (strArray[0] == "createbranch")
-						{
+                            log(string.Format("建立分支结果为:{0}", format), ConsoleColor.Cyan);
+                        }
+                        else if (strArray[0] == "createbranch")
+                        {
                             mgr.m_svndb = strArray[5];
-							log(string.Format("来自[{0}]的用户[{1}], 请求建立分支:{2}, 选择的版本是:{3}", strArray[1], strArray[2], strArray[3], strArray[4]), ConsoleColor.Cyan);
+                            log(string.Format("来自[{0}]的用户[{1}], 请求建立分支:{2}, 选择的版本是:{3}", strArray[1], strArray[2], strArray[3], strArray[4]), ConsoleColor.Cyan);
                             format = mgr.OperSvn(strArray[1], strArray[2], strArray[3], strArray[4], strArray[5]);
-							log(string.Format("建立分支结果为:{0}", format), ConsoleColor.Cyan);
-						}
-						else
-						{
-							format = "收到未定义的指令，拒绝执行。";
-						}
+                            log(string.Format("建立分支结果为:{0}", format), ConsoleColor.Cyan);
+                        }
+                        else
+                        {
+                            format = "收到未定义的指令，拒绝执行。";
+                        }
                         socket.Send(unicode.GetBytes(format));
                     }
                     catch (Exception exception)
