@@ -322,7 +322,7 @@
             int nMainBranchMaxID = getMainBranchMaxID(rootFilePath);
             using (StreamWriter writer = new StreamWriter(rootFilePath, true))
 			{
-				writer.WriteLine(Convert.ToString(nMainBranchMaxID) + "\t" + "/" + rootname);
+				writer.WriteLine(Convert.ToString(nMainBranchMaxID + 1) + "\t" + "/" + rootname);
 			}
 		}
 
