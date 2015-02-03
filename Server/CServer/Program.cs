@@ -109,6 +109,19 @@
                             format = mgr.OperSvn(strArray[1], strArray[2], strArray[3], strArray[4], strArray[5]);
                             log(string.Format("建立分支结果为:{0}", format), ConsoleColor.Cyan);
                         }
+                        else if (strArray[0] == "getUnblockUser")
+                        {
+                            log(string.Format("来自[{0}]的用户[{1}], 请求获取锁库白名单", socket.RemoteEndPoint, strArray[1]), ConsoleColor.Magenta);
+                            mgr.m_svndb = strArray[2];
+                            format = mgr.getUnblockUser(strArray[2]);
+                        }
+                        else if (strArray[0] == "setUnblockUser")
+                        {
+                            log(string.Format("来自[{0}]的用户[{1}], 请求设置锁库白名单", socket.RemoteEndPoint, strArray[1]), ConsoleColor.Magenta);
+                            mgr.m_svndb = strArray[2];
+                            bool bRet = mgr.setUnblockUser(strArray[2], strArray[3]);
+                            format = bRet ? " 设置成功" : " 设置失败";
+                        }
                         else
                         {
                             format = "收到未定义的指令，拒绝执行。";

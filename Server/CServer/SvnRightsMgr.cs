@@ -7,7 +7,7 @@
     using System.IO;
     using System.Text;
     using System.Data;
-    using System.Data.SQLite;
+    using Mono.Data.Sqlite;
 
     internal class SvnRightsMgr
     {
@@ -89,116 +89,64 @@
         }
 
         // 新版的权限是用sqlit管理，需要复制数据库里面的记录
-        //public bool CopyRights_sql(string strProject, string srcSrcBranch, string strDstBranch)
-        //{
-        //    bool bResult = false;
-            
-        //    //string dbPath = "Data Source=" + this.m_strAuthDB;
-        //    string dbPath = "Data Source=submin.db";
-        //    List<AuthDB> authList = new List<AuthDB>();
-        //    SqliteConnection conn = null;
-        //    conn = new SqliteConnection(dbPath);
-        //    conn.Open();
-
-        //    // read
-        //    string sql = "select * from permissions where repository = '" + strProject + "'";
-        //    SqliteCommand cmd = new SqliteCommand(sql, conn);
-        //    SqliteDataReader reader = cmd.ExecuteReader();
-        //    while(reader.Read())
-        //    {
-        //        if(reader.GetString(2).StartsWith(srcSrcBranch))
-        //        {
-        //            AuthDB auth = new AuthDB();
-        //            auth.repository = reader.GetString(0);
-        //            auth.repositorytype = reader.GetString(1);
-        //            auth.path = reader.GetString(2).Replace(srcSrcBranch, strDstBranch); // modify
-        //            auth.subjecttype = reader.GetString(3);
-        //            auth.subjectid = reader.GetInt32(4);
-        //            auth.type = reader.GetString(5);
-
-        //            authList.Add(auth);
-        //            Console.WriteLine(reader.GetString(0) + " " + reader.GetString(2));
-        //            Console.WriteLine(auth.repository + " " + auth.path);
-        //        }
-        //    }
-
-        //    // write
-        //    SqliteTransaction trans = conn.BeginTransaction();
-        //    cmd = new SqliteCommand(conn);
-        //    cmd.Transaction = trans;
-        //    cmd.CommandText = "insert into permissions values(@repository, @repositorytype, @path, @subjecttype, @subjectid, @type)";
-        //    foreach(AuthDB item in authList)
-        //    {
-        //        cmd.Parameters.AddRange(new[] {
-        //            new SqliteParameter("@repository", item.repository),
-        //            new SqliteParameter("@repositorytype", item.repositorytype),
-        //            new SqliteParameter("@path", item.path),
-        //            new SqliteParameter("@subjecttype", item.subjecttype),
-        //            new SqliteParameter("@subjectid", item.subjectid),
-        //            new SqliteParameter("@type", item.type)
-        //        });
-        //        cmd.ExecuteNonQuery();
-        //    }
-        //    trans.Commit();
-
-        //    conn.Close();
-        //    Console.ReadKey();
-            
-        //    return bResult;
-        //}
-
-        public bool CopyRights_sql(string strProject, string srcSrcBranch, string strDstBranch)
+        public bool CopyRights_sql(string strproject, string srcsrcbranch, string strdstbranch)
         {
+            // log(string.format("project:{0}; srcbranch:{1}; dstbranch:{2}", strproject, srcsrcbranch, strdstbranch), consolecolor.black);
             bool bResult = false;
 
             try
             {
-                string dbPath = "Data Source=" + this.m_strAuthDB;
-                //string dbPath = @"Data Source=submin.db";
-                List<AuthDB> authList = new List<AuthDB>();
-                SQLiteConnection conn = null;
-                conn = new SQLiteConnection(dbPath);
+                string dbpath = "data source=" + this.m_strAuthDB;
+                //string dbpath = "data source=./submin.db";
+                List<AuthDB> authlist = new List<AuthDB>();
+                SqliteConnection conn = null;
+                conn = new SqliteConnection(dbpath);
                 conn.Open();
 
-                // read
-                string sql = "select * from permissions where repository = '" + strProject + "'";
-                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
-                SQLiteDataReader reader = cmd.ExecuteReader();
+                string sql = "select * from permissions where repository = '" + strproject + "'";
+                SqliteCommand cmd = new SqliteCommand(sql, conn);
+                SqliteDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    if (reader.GetString(2).StartsWith(srcSrcBranch))
+                    if (reader.GetString(2).StartsWith(srcsrcbranch))
                     {
                         AuthDB auth = new AuthDB();
                         auth.repository = reader.GetString(0);
                         auth.repositorytype = reader.GetString(1);
-                        auth.path = reader.GetString(2).Replace(srcSrcBranch, strDstBranch); // modify
+                        auth.path = reader.GetString(2).Replace(srcsrcbranch, strdstbranch); // modify
                         auth.subjecttype = reader.GetString(3);
-                        auth.subjectid = reader.GetInt32(4);
+                        try
+                        {
+                            auth.subjectid = reader.GetInt32(4);
+                        }
+                        catch(Exception e)
+                        {
+                            log(string.Format("[CopyRights_sql]Exception: {0}{1}", e.Message, e.StackTrace), ConsoleColor.Black);
+                            log(string.Format("[CopyRights_sql]Info: {0}", "此条数据特殊，权限为空，不插入"), ConsoleColor.Black);
+                            continue;
+                        }
+                        
                         auth.type = reader.GetString(5);
+                        log(string.Format("auth.path:{0}", auth.path), ConsoleColor.Black);
 
-                        authList.Add(auth);
-                        Console.WriteLine(reader.GetString(0) + " " + reader.GetString(2));
-                        Console.WriteLine(auth.repository + " " + auth.path);
+                        authlist.Add(auth);
                     }
                 }
 
-                // write
-                SQLiteTransaction trans = conn.BeginTransaction();
-
-                foreach (AuthDB item in authList)
+                SqliteTransaction trans = conn.BeginTransaction();
+                cmd = new SqliteCommand(conn);
+                cmd.Transaction = trans;
+                cmd.CommandText = "insert into permissions values(@repository, @repositorytype, @path, @subjecttype, @subjectid, @type)";
+                foreach (AuthDB item in authlist)
                 {
-                    cmd = new SQLiteCommand(conn);
-                    cmd.Transaction = trans;
-                    cmd.CommandText = "insert into permissions values(@repository, @repositorytype, @path, @subjecttype, @subjectid, @type)";
-
-                    cmd.Parameters.AddRange(new[] {
-                    new SQLiteParameter("@repository", item.repository),
-                    new SQLiteParameter("@repositorytype", item.repositorytype),
-                    new SQLiteParameter("@path", item.path),
-                    new SQLiteParameter("@subjecttype", item.subjecttype),
-                    new SQLiteParameter("@subjectid", item.subjectid),
-                    new SQLiteParameter("@type", item.type)
-                });
+                    cmd.Parameters.AddRange(new SqliteParameter[] {
+                        new SqliteParameter("@repository", item.repository),
+                        new SqliteParameter("@repositorytype", item.repositorytype),
+                        new SqliteParameter("@path", item.path),
+                        new SqliteParameter("@subjecttype", item.subjecttype),
+                        new SqliteParameter("@subjectid", item.subjectid),
+                        new SqliteParameter("@type", item.type)
+                    });
                     cmd.ExecuteNonQuery();
                 }
                 trans.Commit();
@@ -206,13 +154,87 @@
                 conn.Close();
                 bResult = true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                log(string.Format("[CopyRights_sql]Exception: {0}{1}", e.Message, e.StackTrace), ConsoleColor.Black);
             }
 
             return bResult;
         }
+
+//         public bool CopyRights_sql(string strProject, string srcSrcBranch, string strDstBranch)
+//         {
+//             log(string.Format("Project:{0}; SrcBranch:{1}; DstBranch:{2}", strProject, srcSrcBranch, strDstBranch), ConsoleColor.Black);
+//             bool bResult = false;
+// 
+//             try
+//             {
+//                 string dbPath = "Data Source=" + this.m_strAuthDB;
+// 
+//                 log(string.Format("dbPath: {0}", dbPath), ConsoleColor.Black);
+//                 //string dbPath = @"Data Source=submin.db";
+//                 List<AuthDB> authList = new List<AuthDB>();
+//                 SQLiteConnection conn = null;
+//                 
+//                 SQLiteConnectionStringBuilder connstr = new SQLiteConnectionStringBuilder();
+//                 connstr.DataSource = this.m_strAuthDB;
+//                 conn.ConnectionString = connstr.ToString();
+//                 conn.Open();
+//                 
+//                 // read
+//                 string sql = "select * from permissions where repository = '" + strProject + "'";
+//                 SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+//                 SQLiteDataReader reader = cmd.ExecuteReader();
+//                 while (reader.Read())
+//                 {
+//                     if (reader.GetString(2).StartsWith(srcSrcBranch))
+//                     {
+//                         AuthDB auth = new AuthDB();
+//                         auth.repository = reader.GetString(0);
+//                         auth.repositorytype = reader.GetString(1);
+//                         auth.path = reader.GetString(2).Replace(srcSrcBranch, strDstBranch); // modify
+//                         auth.subjecttype = reader.GetString(3);
+//                         auth.subjectid = reader.GetInt32(4);
+//                         auth.type = reader.GetString(5);
+//                         log(string.Format("auth.path:{0}", auth.path), ConsoleColor.Black);
+// 
+//                         authList.Add(auth);
+//                         Console.WriteLine(reader.GetString(0) + " " + reader.GetString(2));
+//                         Console.WriteLine(auth.repository + " " + auth.path);
+//                     }
+//                 }
+// 
+//                 // write
+//                 SQLiteTransaction trans = conn.BeginTransaction();
+// 
+//                 foreach (AuthDB item in authList)
+//                 {
+//                     cmd = new SQLiteCommand(conn);
+//                     cmd.Transaction = trans;
+//                     cmd.CommandText = "insert into permissions values(@repository, @repositorytype, @path, @subjecttype, @subjectid, @type)";
+// 
+//                     cmd.Parameters.AddRange(new SQLiteParameter[] {
+//                     new SQLiteParameter("@repository", item.repository),
+//                     new SQLiteParameter("@repositorytype", item.repositorytype),
+//                     new SQLiteParameter("@path", item.path),
+//                     new SQLiteParameter("@subjecttype", item.subjecttype),
+//                     new SQLiteParameter("@subjectid", item.subjectid),
+//                     new SQLiteParameter("@type", item.type)
+//                 });
+//                     cmd.ExecuteNonQuery();
+//                 }
+//                 trans.Commit();
+// 
+//                 conn.Close();
+//                 bResult = true;
+//             }
+//             catch (Exception e)
+//             {
+//                 log(string.Format("Exception: {0}, {1}", e.Message, e.StackTrace), ConsoleColor.Black);
+//             }
+// 
+//             return bResult;
+//         }
 
         public string CreateRoot(string strIP, string strUserName, string strArg, string strVer, string szProjectName)
 		{
@@ -258,7 +280,7 @@
             this.m_strUrlDest = string.Format(m_baseurl + "/{0}/{1}/",
                 m_svndb.Trim(new Char[] { '/' }),
                 m_autobranch.Trim(new Char[] { '/' }));
-            this.m_nVer = this.getVer(this.m_svndb) + 1;
+            this.m_nVer = this.getVer(this.m_svndb);
             string strprefix = string.Format("{0}a{1:0000}_", this.m_strUrlDest, this.m_nVer);
             string pureBranchName = this.GetPureBranchName(strBranchNameA);
             string strfrom = string.Format("IP:{0}, User:{1}", strIP, strUserName);
@@ -273,7 +295,7 @@
 			Program.log(strprefix, ConsoleColor.Blue);
             Program.log(pureBranchName, ConsoleColor.Blue);
 			Program.log(strparam, ConsoleColor.Blue);
-			string svnresult = CommandDo.Execute("svn", strparam); //"commit test";// 
+            string svnresult = CommandDo.Execute("svn", strparam); //"commit test";// 
 			this.m_strRet = (svnresult.IndexOf("commit", StringComparison.OrdinalIgnoreCase) > -1)
 				? string.Format("创建分支[{0}]成功！具体地址:\r\n{1}\r\n", pureBranchName, strprefix + pureBranchName)
 				: string.Format("创建分支[{0}]失败！原因：\r\n{1}\r\nsvn参数：{2}", pureBranchName, svnresult, strparam);
@@ -615,7 +637,7 @@
             {
                 bool bRet = true;
                 this.m_strDest = string.Format("{0}:{1}", m_svndb, m_autobranch);
-                this.m_nVer = this.getVer(this.m_svndb) + 1;
+                //this.m_nVer = this.getVer(this.m_svndb) + 1;
                 string strSrc = this.getStrSrc(strVer);
                 string strDestRights = string.Format(this.m_strDest + "/a{0:0000}_{1}", this.m_nVer, this.GetPureBranchName(strArg));
                 //this.CopyRights(this.m_strAuthFile, strSrc, strDestRights);
@@ -717,6 +739,41 @@
                 }
                 strret = builder.ToString();
             }
+        }
+
+        public string getUnblockUser(string szProjectName)
+        {
+            if (szProjectName == "")
+                return "";
+            string rootsfile = szProjectName + "/unblockuser.txt";
+            string str;
+
+            StreamReader reader = File.OpenText(rootsfile);
+            StringBuilder builder = new StringBuilder();
+            while ((str = reader.ReadLine()) != null)
+            //if ((str = reader.ReadToEnd()) != "")
+            {
+                //builder.Append(str + "\t");
+                builder.Append(str + "\r\n");
+            }
+            reader.Close();
+            return builder.ToString();
+        }
+
+        public bool setUnblockUser(string szProjectName, string users)
+        {
+            bool bResult = false;
+            if (szProjectName == "")
+                return bResult;
+            string rootsfile = szProjectName + "/unblockuser.txt";
+
+            using (StreamWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + "/" + szProjectName + "/unblockuser.txt"))
+            {
+                writer.WriteLine(users);
+            }
+
+            bResult = true;
+            return bResult;
         }
 
         // this function is useless, waiting to delete!
@@ -911,6 +968,19 @@
             writer.Flush();
             writer.Close();
         }
+
+        public static void log(string strlog, ConsoleColor newcolr)
+        {
+            strlog = string.Format("[{0}] ", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")) + strlog;
+            ConsoleColor foregroundColor = Console.ForegroundColor;
+            Console.ForegroundColor = newcolr;
+            Console.WriteLine(strlog);
+            Console.ForegroundColor = foregroundColor;
+            StreamWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + "/log/log.txt", true);
+            writer.WriteLine(strlog);
+            writer.Close();
+        }
+
     }
 
     class AuthDB
@@ -925,4 +995,5 @@
         public int subjectid;
         public string type;
     }
+
 }

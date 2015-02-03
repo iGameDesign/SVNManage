@@ -354,5 +354,84 @@ namespace CSvnBranchLocker
             }
             return sz_ip;
         }
+
+        private void btAddUnblockUser_Click(object sender, EventArgs e)
+        {
+            if (this.tbUnblockUser.Text == "")
+                return;
+
+            bool bExist = false;
+            for (int i = 0; i < this.ckListBoxUnblockUser.Items.Count; i++)
+            {
+                if (this.tbUnblockUser.Text == this.ckListBoxUnblockUser.Items[i].ToString())
+                {
+                    bExist = true;
+                    break;
+                }
+            }
+
+            if(!bExist)
+            {
+                this.ckListBoxUnblockUser.Items.Add(this.tbUnblockUser.Text);
+
+                string strUsers = "";
+                string[] users = new string[this.ckListBoxUnblockUser.Items.Count];
+                for (int i = 0; i < this.ckListBoxUnblockUser.Items.Count; i++)
+                {
+                    users[i] = this.ckListBoxUnblockUser.Items[i].ToString();
+                }
+                strUsers = String.Join("\r\n", users);
+
+                string strCMD = string.Format("{0}\t{1}\t{2}\t{3}",
+                    new object[] { "setUnblockUser", this.tbLoginUser.Text, this.cbProjectName.SelectedItem, strUsers });
+                string strRet = DispatchCmd(strCMD);
+                this.Log("接收结果:" + strRet + "\n", Color.DarkRed);
+            }
+            else
+            {
+                this.Log("接收结果:" + "白名单重复。" + "\n", Color.DarkRed);
+            }
+        }
+
+        private void btUpdateUnblockUser_Click(object sender, EventArgs e)
+        {
+            string strCMD = string.Format("{0}\t{1}\t{2}", "getUnblockUser", this.tbLoginUser.Text, this.cbProjectName.SelectedItem);
+            string strRet = DispatchCmd(strCMD);
+            string[] strArray = strRet.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            this.ckListBoxUnblockUser.Items.Clear();
+
+            for (int i = 0; i < strArray.Length; i++)
+            {
+                if (strArray[i] != "")
+                {
+                    this.ckListBoxUnblockUser.Items.Add(strArray[i]);
+                }
+            }
+        }
+
+        private void btDelUnblockUser_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < this.ckListBoxUnblockUser.Items.Count; i++)
+            {
+                bool bChecked = this.ckListBoxUnblockUser.GetItemChecked(i);
+                if (bChecked)
+                {
+                    this.ckListBoxUnblockUser.Items.RemoveAt(i);
+                }
+            }
+
+            string strUsers = "";
+            string[] users = new string[this.ckListBoxUnblockUser.Items.Count];
+            for (int i = 0; i < this.ckListBoxUnblockUser.Items.Count; i++)
+            {
+                users[i] = this.ckListBoxUnblockUser.Items[i].ToString();
+            }
+            strUsers = String.Join("\r\n", users);
+
+            string strCMD = string.Format("{0}\t{1}\t{2}\t{3}",
+                new object[] { "setUnblockUser", this.tbLoginUser.Text, this.cbProjectName.SelectedItem, strUsers });
+            string strRet = DispatchCmd(strCMD);
+            this.Log("接收结果:" + strRet + "\n", Color.DarkRed);
+        }
     }
 }

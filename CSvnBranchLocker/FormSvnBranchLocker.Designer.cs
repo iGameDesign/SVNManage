@@ -43,6 +43,11 @@
             this.ckListBoxBranches = new System.Windows.Forms.CheckedListBox();
             this.btnUpdateBranches = new System.Windows.Forms.Button();
             this.cbProjectName = new System.Windows.Forms.ComboBox();
+            this.ckListBoxUnblockUser = new System.Windows.Forms.CheckedListBox();
+            this.btUpdateUnblockUser = new System.Windows.Forms.Button();
+            this.btDelUnblockUser = new System.Windows.Forms.Button();
+            this.tbUnblockUser = new System.Windows.Forms.TextBox();
+            this.btAddUnblockUser = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -126,7 +131,7 @@
             // 
             this.rtbLogInfo.Location = new System.Drawing.Point(-1, 260);
             this.rtbLogInfo.Name = "rtbLogInfo";
-            this.rtbLogInfo.Size = new System.Drawing.Size(501, 279);
+            this.rtbLogInfo.Size = new System.Drawing.Size(610, 279);
             this.rtbLogInfo.TabIndex = 11;
             this.rtbLogInfo.Text = "";
             // 
@@ -141,7 +146,7 @@
             // 
             // btnLockBranches
             // 
-            this.btnLockBranches.Location = new System.Drawing.Point(298, 218);
+            this.btnLockBranches.Location = new System.Drawing.Point(245, 163);
             this.btnLockBranches.Name = "btnLockBranches";
             this.btnLockBranches.Size = new System.Drawing.Size(86, 23);
             this.btnLockBranches.TabIndex = 15;
@@ -154,12 +159,12 @@
             this.ckListBoxBranches.FormattingEnabled = true;
             this.ckListBoxBranches.Location = new System.Drawing.Point(117, 135);
             this.ckListBoxBranches.Name = "ckListBoxBranches";
-            this.ckListBoxBranches.Size = new System.Drawing.Size(163, 116);
+            this.ckListBoxBranches.Size = new System.Drawing.Size(121, 116);
             this.ckListBoxBranches.TabIndex = 16;
             // 
             // btnUpdateBranches
             // 
-            this.btnUpdateBranches.Location = new System.Drawing.Point(298, 145);
+            this.btnUpdateBranches.Location = new System.Drawing.Point(245, 137);
             this.btnUpdateBranches.Name = "btnUpdateBranches";
             this.btnUpdateBranches.Size = new System.Drawing.Size(86, 23);
             this.btnUpdateBranches.TabIndex = 17;
@@ -175,11 +180,61 @@
             this.cbProjectName.Size = new System.Drawing.Size(121, 20);
             this.cbProjectName.TabIndex = 18;
             // 
+            // ckListBoxUnblockUser
+            // 
+            this.ckListBoxUnblockUser.FormattingEnabled = true;
+            this.ckListBoxUnblockUser.Location = new System.Drawing.Point(358, 135);
+            this.ckListBoxUnblockUser.Name = "ckListBoxUnblockUser";
+            this.ckListBoxUnblockUser.Size = new System.Drawing.Size(134, 116);
+            this.ckListBoxUnblockUser.TabIndex = 19;
+            // 
+            // btUpdateUnblockUser
+            // 
+            this.btUpdateUnblockUser.Location = new System.Drawing.Point(498, 136);
+            this.btUpdateUnblockUser.Name = "btUpdateUnblockUser";
+            this.btUpdateUnblockUser.Size = new System.Drawing.Size(106, 23);
+            this.btUpdateUnblockUser.TabIndex = 20;
+            this.btUpdateUnblockUser.Text = "更新锁库白名单";
+            this.btUpdateUnblockUser.UseVisualStyleBackColor = true;
+            this.btUpdateUnblockUser.Click += new System.EventHandler(this.btUpdateUnblockUser_Click);
+            // 
+            // btDelUnblockUser
+            // 
+            this.btDelUnblockUser.Location = new System.Drawing.Point(498, 162);
+            this.btDelUnblockUser.Name = "btDelUnblockUser";
+            this.btDelUnblockUser.Size = new System.Drawing.Size(86, 23);
+            this.btDelUnblockUser.TabIndex = 21;
+            this.btDelUnblockUser.Text = "删除所选人员";
+            this.btDelUnblockUser.UseVisualStyleBackColor = true;
+            this.btDelUnblockUser.Click += new System.EventHandler(this.btDelUnblockUser_Click);
+            // 
+            // tbUnblockUser
+            // 
+            this.tbUnblockUser.Location = new System.Drawing.Point(358, 109);
+            this.tbUnblockUser.Name = "tbUnblockUser";
+            this.tbUnblockUser.Size = new System.Drawing.Size(134, 21);
+            this.tbUnblockUser.TabIndex = 22;
+            // 
+            // btAddUnblockUser
+            // 
+            this.btAddUnblockUser.Location = new System.Drawing.Point(498, 107);
+            this.btAddUnblockUser.Name = "btAddUnblockUser";
+            this.btAddUnblockUser.Size = new System.Drawing.Size(86, 23);
+            this.btAddUnblockUser.TabIndex = 23;
+            this.btAddUnblockUser.Text = "增加所选人员";
+            this.btAddUnblockUser.UseVisualStyleBackColor = true;
+            this.btAddUnblockUser.Click += new System.EventHandler(this.btAddUnblockUser_Click);
+            // 
             // FormSvnBranchLocker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(500, 539);
+            this.ClientSize = new System.Drawing.Size(608, 539);
+            this.Controls.Add(this.btAddUnblockUser);
+            this.Controls.Add(this.tbUnblockUser);
+            this.Controls.Add(this.btDelUnblockUser);
+            this.Controls.Add(this.btUpdateUnblockUser);
+            this.Controls.Add(this.ckListBoxUnblockUser);
             this.Controls.Add(this.cbProjectName);
             this.Controls.Add(this.btnUpdateBranches);
             this.Controls.Add(this.ckListBoxBranches);
@@ -221,6 +276,11 @@
         private System.Windows.Forms.CheckedListBox ckListBoxBranches;
         private System.Windows.Forms.Button btnUpdateBranches;
         private System.Windows.Forms.ComboBox cbProjectName;
+        private System.Windows.Forms.CheckedListBox ckListBoxUnblockUser;
+        private System.Windows.Forms.Button btUpdateUnblockUser;
+        private System.Windows.Forms.Button btDelUnblockUser;
+        private System.Windows.Forms.TextBox tbUnblockUser;
+        private System.Windows.Forms.Button btAddUnblockUser;
     }
 }
 
