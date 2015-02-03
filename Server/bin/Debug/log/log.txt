@@ -1127,3 +1127,69 @@ svn参数：cp -m "create branch" -m "checker:auto  IP:192.168.2.135, User:PENGP
 [2015-02-03 18:02:25] 来自[192.168.2.135:25799]的用户[PENGPENG], 请求获取锁库白名单
 [2015-02-03 18:02:25] 来自[192.168.2.135:25800]的用户[PENGPENG], 请求获取锁库白名单
 [2015-02-03 18:02:30] 来自[192.168.2.135:25803]的用户[PENGPENG], 请求设置锁库白名单
+[2015-02-03 18:11:00] 来自[192.168.2.135:26125]的用户[PENGPENG], 请求登录,　请求密钥为:5cf0c953776a862fc7b992625fc8c9d, 操作的库为gunsoul
+[2015-02-03 18:11:00] 登录成功
+[2015-02-03 18:11:00] 来自[192.168.2.135:26127]的用户[PENGPENG], 请求查询分支锁定状态
+[2015-02-03 18:11:04] 来自[192.168.2.135:26131]的用户[PENGPENG], 请求获取锁库白名单
+[2015-02-03 18:11:04] System.IO.FileNotFoundException: 未能找到文件“E:\WorkSpace\Tools\SVNSvr\Server\bin\Debug\gunsoul\unblockuser.txt”。
+文件名:“E:\WorkSpace\Tools\SVNSvr\Server\bin\Debug\gunsoul\unblockuser.txt”
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   在 System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize)
+   在 System.IO.StreamReader..ctor(String path, Boolean detectEncodingFromByteOrderMarks)
+   在 System.IO.File.OpenText(String path)
+   在 CServer.SvnRightsMgr.getUnblockUser(String szProjectName) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 751
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 116
+[2015-02-03 18:11:28] version 1.3
+[2015-02-03 18:11:28] 开启端口服务....
+[2015-02-03 18:11:28] 本地节点：192.168.2.135:18008
+[2015-02-03 18:11:28] 等待连接.....
+[2015-02-03 18:11:29] 来自[192.168.2.135:26147]的用户[PENGPENG], 请求获取锁库白名单
+[2015-02-03 18:16:49] version 1.3
+[2015-02-03 18:16:49] 开启端口服务....
+[2015-02-03 18:16:49] 本地节点：192.168.2.135:18008
+[2015-02-03 18:16:49] 等待连接.....
+[2015-02-03 18:16:57] 来自[192.168.2.135:26402]的用户[PENGPENG], 请求登录,　请求密钥为:5cf0c953776a862fc7b992625fc8c9d, 操作的库为gunsoul
+[2015-02-03 18:16:57] 登录成功
+[2015-02-03 18:16:57] 来自[192.168.2.135:26406]的用户[PENGPENG], 请求查询分支锁定状态
+[2015-02-03 18:16:57] 来自[192.168.2.135:26408]的用户[PENGPENG], 请求获取锁库白名单
+[2015-02-03 18:17:28] version 1.3
+[2015-02-03 18:17:28] 开启端口服务....
+[2015-02-03 18:17:28] 本地节点：192.168.2.135:18008
+[2015-02-03 18:17:28] 等待连接.....
+[2015-02-03 18:17:52] 来自[192.168.2.135:26447]的用户[PENGPENG], 请求获取锁库白名单
+[2015-02-03 18:20:47] version 1.3
+[2015-02-03 18:20:47] 开启端口服务....
+[2015-02-03 18:20:47] 本地节点：192.168.2.135:18008
+[2015-02-03 18:20:47] 等待连接.....
+[2015-02-03 18:20:51] 来自[192.168.2.135:26591]的用户[PENGPENG], 请求登录,　请求密钥为:5cf0c953776a862fc7b992625fc8c9d, 操作的库为gunsoul
+[2015-02-03 18:20:51] 登录成功
+[2015-02-03 18:20:51] 来自[192.168.2.135:26595]的用户[PENGPENG], 请求查询分支锁定状态
+[2015-02-03 18:20:52] 来自[192.168.2.135:26596]的用户[PENGPENG], 请求获取锁库白名单
+[2015-02-03 18:28:03] version 1.3
+[2015-02-03 18:28:03] 开启端口服务....
+[2015-02-03 18:28:03] 本地节点：192.168.2.135:18008
+[2015-02-03 18:28:03] 等待连接.....
+[2015-02-03 18:32:49] 来自[192.168.2.135:27134]的用户[PENGPENG], 请求登录,　请求密钥为:5cf0c953776a862fc7b992625fc8c9d, 操作的库为gunsoul
+[2015-02-03 18:32:49] 登录成功
+[2015-02-03 18:32:49] 来自[192.168.2.135:27138]的用户[PENGPENG], 请求查询分支锁定状态
+[2015-02-03 18:32:54] 来自[192.168.2.135:27141]的用户[PENGPENG], 请求获取锁库白名单
+[2015-02-03 18:33:17] 来自[192.168.2.135:27154]的用户[PENGPENG], 请求获取锁库白名单
+[2015-02-03 18:33:23] 来自[192.168.2.135:27157]的用户[PENGPENG], 请求设置锁库白名单
+[2015-02-03 18:33:31] 来自[192.168.2.135:27161]的用户[PENGPENG], 请求设置锁库白名单
+[2015-02-03 18:34:09] System.IndexOutOfRangeException: 索引超出了数组界限。
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 122
+[2015-02-03 18:36:09] version 1.3
+[2015-02-03 18:36:09] 开启端口服务....
+[2015-02-03 18:36:09] 本地节点：192.168.2.135:18008
+[2015-02-03 18:36:09] 等待连接.....
+[2015-02-03 18:36:13] 来自[192.168.2.135:27279]的用户[PENGPENG], 请求登录,　请求密钥为:5cf0c953776a862fc7b992625fc8c9d, 操作的库为gunsoul
+[2015-02-03 18:36:13] 登录成功
+[2015-02-03 18:36:13] 来自[192.168.2.135:27283]的用户[PENGPENG], 请求查询分支锁定状态
+[2015-02-03 18:36:15] 来自[192.168.2.135:27285]的用户[PENGPENG], 请求获取锁库白名单
+[2015-02-03 18:36:20] 来自[192.168.2.135:27288]的用户[PENGPENG], 请求设置锁库白名单
+[2015-02-03 18:36:31] 来自[192.168.2.135:27297]的用户[PENGPENG], 请求设置锁库白名单
+[2015-02-03 18:36:36] 来自[192.168.2.135:27300]的用户[PENGPENG], 请求设置锁库白名单
+[2015-02-03 18:36:48] 来自[192.168.2.135:27308]的用户[PENGPENG], 请求设置锁库白名单

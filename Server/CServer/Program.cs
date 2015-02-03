@@ -117,15 +117,22 @@
                         }
                         else if (strArray[0] == "setUnblockUser")
                         {
+                            bool bRet = false;
                             log(string.Format("来自[{0}]的用户[{1}], 请求设置锁库白名单", socket.RemoteEndPoint, strArray[1]), ConsoleColor.Magenta);
                             mgr.m_svndb = strArray[2];
-                            bool bRet = mgr.setUnblockUser(strArray[2], strArray[3]);
+                            if(strArray.Length == 3)
+                                bRet = mgr.setUnblockUser(strArray[2], "");
+                            else if(strArray.Length == 4)
+                                bRet = mgr.setUnblockUser(strArray[2], strArray[3]);
+                             
                             format = bRet ? " 设置成功" : " 设置失败";
                         }
                         else
                         {
                             format = "收到未定义的指令，拒绝执行。";
                         }
+                        if (format == "")
+                            format = "操作成功。";
                         socket.Send(unicode.GetBytes(format));
                     }
                     catch (Exception exception)

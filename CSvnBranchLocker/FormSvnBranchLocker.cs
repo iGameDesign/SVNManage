@@ -172,6 +172,8 @@ namespace CSvnBranchLocker
             {
                 this.Log(string.Format("Error:{0}", exception.Message), Color.Red);
             }
+            if (result == "操作成功。")
+                result = "";
             return result;
         }
 
