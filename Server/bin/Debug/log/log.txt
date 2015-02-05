@@ -1193,3 +1193,96 @@ svn参数：cp -m "create branch" -m "checker:auto  IP:192.168.2.135, User:PENGP
 [2015-02-03 18:36:31] 来自[192.168.2.135:27297]的用户[PENGPENG], 请求设置锁库白名单
 [2015-02-03 18:36:36] 来自[192.168.2.135:27300]的用户[PENGPENG], 请求设置锁库白名单
 [2015-02-03 18:36:48] 来自[192.168.2.135:27308]的用户[PENGPENG], 请求设置锁库白名单
+[2015-02-04 14:15:06] version 1.3
+[2015-02-04 14:15:06] Error:通常每个套接字地址(协议/网络地址/端口)只允许使用一次。
+[2015-02-04 14:15:21] 来自[192.168.2.135:13353]的用户[PENGPENG], 请求获取锁库白名单
+[2015-02-04 14:15:26] 来自[192.168.2.135:13357]的用户[PENGPENG], 请求设置锁库白名单
+[2015-02-04 14:22:54] 来自[192.168.2.135:13684]的用户[PENGPENG], 请求获取锁库白名单
+[2015-02-04 14:23:07] 来自[192.168.2.135:13693]的用户[PENGPENG], 请求设置锁库白名单
+[2015-02-04 14:23:10] 来自[192.168.2.135:13695]的用户[PENGPENG], 请求设置锁库白名单
+[2015-02-04 14:23:13] 来自[192.168.2.135:13698]的用户[PENGPENG], 请求设置锁库白名单
+[2015-02-04 14:23:15] 来自[192.168.2.135:13700]的用户[PENGPENG], 请求获取锁库白名单
+[2015-02-04 14:23:15] 来自[192.168.2.135:13701]的用户[PENGPENG], 请求获取锁库白名单
+[2015-02-05 10:58:39] version 1.3
+[2015-02-05 10:58:39] Error:通常每个套接字地址(协议/网络地址/端口)只允许使用一次。
+[2015-02-05 10:59:12] 来自[192.168.2.135]的用户[PENGPENG], 请求建立主分支:xxx, 选择的版本是:/bbt
+[2015-02-05 10:59:48] IP:192.168.2.135, User:PENGPENG
+[2015-02-05 10:59:48] svn cp -m "create root" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" https://svn.funova.com/svn/gunsoul/bbt/ https://svn.funova.com/svn/gunsoul/xxx/
+[2015-02-05 11:00:35] [CopyRights_sql]Exception: “Mono.Data.Sqlite.SqliteConvert”的类型初始值设定项引发异常。   在 Mono.Data.Sqlite.SqliteConvert.Split(String source, Char separator)
+   在 Mono.Data.Sqlite.SqliteConnection.ParseConnectionString(String connectionString)
+   在 Mono.Data.Sqlite.SqliteConnection.Open()
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strproject, String srcsrcbranch, String strdstbranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 104
+[2015-02-05 11:00:39] 建立分支结果为:WARNING:创建分支成功，但是复制权限失败，有可能是权限管理数据库里面源库不存在或者有重置的目标库。项目：gunsoul，源库：/bbt，目标库：/xxx
+[2015-02-05 11:19:22] version 1.3
+[2015-02-05 11:19:22] 开启端口服务....
+[2015-02-05 11:19:22] 本地节点：192.168.2.135:18008
+[2015-02-05 11:19:22] 等待连接.....
+[2015-02-05 11:19:51] 来自[192.168.2.135]的用户[PENGPENG], 请求建立分支:bbt_xx, 选择的版本是:/bbt
+[2015-02-05 11:19:51] IP:192.168.2.135, User:PENGPENG
+[2015-02-05 11:19:51] https://svn.funova.com/svn/gunsoul/bbt/
+[2015-02-05 11:19:51] https://svn.funova.com/svn/gunsoul/branches/autobranch/a0604_
+[2015-02-05 11:19:51] bbt_xx
+[2015-02-05 11:19:51] cp -m "create branch" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" https://svn.funova.com/svn/gunsoul/bbt/ https://svn.funova.com/svn/gunsoul/branches/autobranch/a0604_bbt_xx
+[2015-02-05 11:19:52] 建立分支结果为:创建分支[bbt_xx]失败！原因：
+
+提交后的版本为 44178。
+
+svn参数：cp -m "create branch" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" https://svn.funova.com/svn/gunsoul/bbt/ https://svn.funova.com/svn/gunsoul/branches/autobranch/a0604_bbt_xx
+[2015-02-05 11:20:03] 来自[192.168.2.135]的用户[PENGPENG], 请求建立主分支:bbt_xx, 选择的版本是:/bbt
+[2015-02-05 11:20:03] IP:192.168.2.135, User:PENGPENG
+[2015-02-05 11:20:03] svn cp -m "create root" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" https://svn.funova.com/svn/gunsoul/bbt/ https://svn.funova.com/svn/gunsoul/bbt_xx/
+[2015-02-05 11:20:04] 建立分支结果为:WARNING:创建分支成功，但是复制权限失败，有可能是权限管理数据库里面源库不存在或者有重置的目标库。项目：gunsoul，源库：/bbt，目标库：/bbt_xx
+[2015-02-05 11:23:47] version 1.3
+[2015-02-05 11:23:47] 开启端口服务....
+[2015-02-05 11:23:47] 本地节点：192.168.2.135:18008
+[2015-02-05 11:23:47] 等待连接.....
+[2015-02-05 11:23:51] 来自[192.168.2.135]的用户[PENGPENG], 请求建立主分支:bbt_xx, 选择的版本是:/bbt
+[2015-02-05 11:23:51] IP:192.168.2.135, User:PENGPENG
+[2015-02-05 11:23:51] svn cp -m "create root" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" https://svn.funova.com/svn/gunsoul/bbt/ https://svn.funova.com/svn/gunsoul/bbt_xx/
+[2015-02-05 11:23:52] 建立分支结果为:WARNING:创建分支失败，目标库名跟源库名有重复的部分。项目：gunsoul，源库：/bbt，目标库：/bbt_xx
+[2015-02-05 11:31:10] version 1.3
+[2015-02-05 11:31:10] 开启端口服务....
+[2015-02-05 11:31:10] 本地节点：192.168.2.135:18008
+[2015-02-05 11:31:10] 等待连接.....
+[2015-02-05 11:31:45] 来自[192.168.2.135]的用户[PENGPENG], 请求建立主分支:btt_xx, 选择的版本是:/bbt
+[2015-02-05 11:49:47] IP:192.168.2.135, User:PENGPENG
+[2015-02-05 11:49:47] svn cp -m "create root" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" https://svn.funova.com/svn/gunsoul/bbt/ https://svn.funova.com/svn/gunsoul/btt_xx/
+[2015-02-05 11:49:47] [CopyRights_sql]Exception: “Mono.Data.Sqlite.SqliteConvert”的类型初始值设定项引发异常。   在 Mono.Data.Sqlite.SqliteConvert.Split(String source, Char separator)
+   在 Mono.Data.Sqlite.SqliteConnection.ParseConnectionString(String connectionString)
+   在 Mono.Data.Sqlite.SqliteConnection.Open()
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strproject, String srcsrcbranch, String strdstbranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 106
+[2015-02-05 11:49:47] 建立分支结果为:WARNING:复制权限失败，有可能是权限管理数据库里面源库不存在或者有重置的目标库。项目：gunsoul，源库：/bbt，目标库：/btt_xx
+[2015-02-05 11:49:47] System.Net.Sockets.SocketException: 远程主机强迫关闭了一个现有的连接。
+   在 System.Net.Sockets.Socket.Send(Byte[] buffer)
+   在 CServer.Program.Main(String[] args) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\Program.cs:行号 136
+[2015-02-05 11:50:17] 来自[192.168.2.135]的用户[PENGPENG], 请求建立主分支:bbt_ss, 选择的版本是:/bbt
+[2015-02-05 11:50:25] IP:192.168.2.135, User:PENGPENG
+[2015-02-05 11:50:25] svn cp -m "create root" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" https://svn.funova.com/svn/gunsoul/bbt/ https://svn.funova.com/svn/gunsoul/bbt_ss/
+[2015-02-05 11:50:56] 建立分支结果为:WARNING:创建分支失败，目标库名跟源库名有重复的部分。项目：gunsoul，源库：/bbt，目标库：/bbt_ss
+[2015-02-05 11:51:03] 来自[192.168.2.135]的用户[PENGPENG], 请求建立分支:bbt_ss, 选择的版本是:/bbt
+[2015-02-05 11:51:11] IP:192.168.2.135, User:PENGPENG
+[2015-02-05 11:51:15] https://svn.funova.com/svn/gunsoul/bbt/
+[2015-02-05 11:51:54] https://svn.funova.com/svn/gunsoul/branches/autobranch/a0604_
+[2015-02-05 11:51:54] bbt_ss
+[2015-02-05 11:51:54] cp -m "create branch" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" https://svn.funova.com/svn/gunsoul/bbt/ https://svn.funova.com/svn/gunsoul/branches/autobranch/a0604_bbt_ss
+[2015-02-05 11:51:55] 建立分支结果为:创建分支[bbt_ss]失败！原因：
+
+提交后的版本为 44180。
+
+svn参数：cp -m "create branch" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" https://svn.funova.com/svn/gunsoul/bbt/ https://svn.funova.com/svn/gunsoul/branches/autobranch/a0604_bbt_ss
+[2015-02-05 12:14:01] 来自[192.168.2.135]的用户[PENGPENG], 请求建立主分支:bbt_ss, 选择的版本是:/bbt
+[2015-02-05 12:14:03] IP:192.168.2.135, User:PENGPENG
+[2015-02-05 12:14:03] svn cp -m "create root" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" https://svn.funova.com/svn/gunsoul/bbt/ https://svn.funova.com/svn/gunsoul/bbt_ss/
+[2015-02-05 12:14:03] 建立分支结果为:WARNING:创建分支失败，目标库名跟源库名有重复的部分。项目：gunsoul，源库：/bbt，目标库：/bbt_ss
+[2015-02-05 12:14:28] 来自[192.168.2.135]的用户[PENGPENG], 请求建立主分支:bbt_aa, 选择的版本是:/bbt
+[2015-02-05 12:14:28] IP:192.168.2.135, User:PENGPENG
+[2015-02-05 12:14:28] svn cp -m "create root" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" https://svn.funova.com/svn/gunsoul/bbt/ https://svn.funova.com/svn/gunsoul/bbt_aa/
+[2015-02-05 12:14:28] 建立分支结果为:WARNING:创建分支失败，目标库名跟源库名有重复的部分。项目：gunsoul，源库：/bbt，目标库：/bbt_aa
+[2015-02-05 12:14:38] 来自[192.168.2.135]的用户[PENGPENG], 请求建立主分支:aaa, 选择的版本是:/bbt
+[2015-02-05 12:14:38] IP:192.168.2.135, User:PENGPENG
+[2015-02-05 12:14:38] svn cp -m "create root" -m "checker:auto  IP:192.168.2.135, User:PENGPENG" https://svn.funova.com/svn/gunsoul/bbt/ https://svn.funova.com/svn/gunsoul/aaa/
+[2015-02-05 12:14:38] [CopyRights_sql]Exception: “Mono.Data.Sqlite.SqliteConvert”的类型初始值设定项引发异常。   在 Mono.Data.Sqlite.SqliteConvert.Split(String source, Char separator)
+   在 Mono.Data.Sqlite.SqliteConnection.ParseConnectionString(String connectionString)
+   在 Mono.Data.Sqlite.SqliteConnection.Open()
+   在 CServer.SvnRightsMgr.CopyRights_sql(String strproject, String srcsrcbranch, String strdstbranch) 位置 e:\workspace\Tools\SVNSvr\Server\CServer\SvnRightsMgr.cs:行号 106
+[2015-02-05 12:14:38] 建立分支结果为:WARNING:复制权限失败，有可能是权限管理数据库里面源库不存在或者有重置的目标库。项目：gunsoul，源库：/bbt，目标库：/aaa

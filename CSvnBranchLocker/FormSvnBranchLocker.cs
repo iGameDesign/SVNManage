@@ -413,12 +413,16 @@ namespace CSvnBranchLocker
 
         private void btDelUnblockUser_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < this.ckListBoxUnblockUser.Items.Count; i++)
+            for (int i = 0; i < this.ckListBoxUnblockUser.Items.Count;)
             {
                 bool bChecked = this.ckListBoxUnblockUser.GetItemChecked(i);
                 if (bChecked)
                 {
                     this.ckListBoxUnblockUser.Items.RemoveAt(i);
+                }
+                else
+                {
+                    i++;
                 }
             }
 

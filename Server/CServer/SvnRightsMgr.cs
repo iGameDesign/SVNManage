@@ -247,31 +247,48 @@
 								this.getStrUrlSrc(strArg)});
 			Program.log(strfrom, ConsoleColor.Blue);
 			Program.log("svn " + strparams, ConsoleColor.Blue);
-            string svnresult = CommandDo.Execute("svn", strparams); //"commit test";// 
-            if (svnresult.IndexOf("commit", StringComparison.OrdinalIgnoreCase) > -1)
+            
+            //if (svnresult.IndexOf("commit", StringComparison.OrdinalIgnoreCase) > -1)
 			{
 				// 复制权限文件
-                bool bRet = false;
+                
                 //string strSrc = this.getStrSrc(strVer);
                 //string strDestRights = this.getStrSrc(strArg);
                 //this.CopyRights(this.m_strAuthFile, strSrc, strDestRights);
-                bRet = this.CopyRights_sql(szProjectName, strVer, "/" + strArg);
-                if(bRet)
+
+                // 创建主分支不能copy权限数据，会出问题
+                if (!("/" + strArg).StartsWith(strVer))
                 {
-                    // 添加主分支到列表
-                    this.addroot(strArg, szProjectName);
-				    this.m_strRet = string.Format("创建分支[{0}]成功！具体地址:\r\n{1}\r\n", strArg, this.getStrUrlSrc(strArg));
+                    bool bRet = false;
+                    bRet = this.CopyRights_sql(szProjectName, strVer, "/" + strArg);
+                    if (bRet)
+                    {
+                        string svnresult = CommandDo.Execute("svn", strparams); //"commit test";// 
+                        if (svnresult.IndexOf("commit", StringComparison.OrdinalIgnoreCase) > -1)
+                        {
+                            //
+                            // 添加主分支到列表
+                            this.addroot(strArg, szProjectName);
+                            this.m_strRet = string.Format("创建分支[{0}]成功！具体地址:\r\n{1}\r\n", strArg, this.getStrUrlSrc(strArg));
+                        }
+                        else
+                        {
+                            this.m_strRet = string.Format("创建分支[{0}]失败！原因：\r\n{1}\r\nsvn参数：{2}", this.getStrUrlSrc(strArg), svnresult, strparams);
+                        }
+                    }
+                    else
+                    {
+                        this.m_strRet = string.Format("WARNING:复制权限失败，有可能是权限管理数据库里面源库不存在或者有重置的目标库。项目：{0}，源库：{1}，目标库：{2}",
+                            szProjectName, strVer, "/" + strArg);
+                    }
                 }
                 else
                 {
-                    this.m_strRet = string.Format("WARNING:创建分支成功，但是复制权限失败，有可能是权限管理数据库里面源库不存在或者有重置的目标库。项目：{0}，源库：{1}，目标库：{2}",
+                    this.m_strRet = string.Format("WARNING:创建分支失败，目标库名跟源库名有重复的部分。项目：{0}，源库：{1}，目标库：{2}",
                         szProjectName, strVer, "/" + strArg);
                 }
 			}
-            else
-			{
-                this.m_strRet = string.Format("创建分支[{0}]失败！原因：\r\n{1}\r\nsvn参数：{2}", this.getStrUrlSrc(strArg), svnresult, strparams);
-			}
+            
 			return this.m_strRet;
 		}
 
