@@ -1,0 +1,273 @@
+#!/bin/sh
+
+# PRE-LOCK HOOK
+#
+# The pre-lock hook is invoked before an exclusive lock is
+# created.  Subversion runs this hook by invoking a program
+# (script, executable, binary, etc.) named 'pre-lock' (for which
+# this file is a template), with the following ordered arguments:
+#
+#   [1] REPOS-PATH   (the path to this repository)
+#   [2] PATH         (the path in the repository about to be locked)
+#   [3] USER         (the user creating the lock)
+#   [4] COMMENT      (the comment of the lock)
+#   [5] STEAL-LOCK   (1 if the user is trying to steal the lock, else 0)
+#
+# If the hook program outputs anything on stdout, the output string will
+# be used as the lock token for this lock operation.  If you choose to use
+# this feature, you must guarantee the tokens generated are unique across
+# the repository each time.
+#
+# The default working directory for the invocation is undefined, so
+# the program should set one explicitly if it cares.
+#
+# If the hook program exits with success, the lock is created; but
+# if it exits with failure (non-zero), the lock action is aborted
+# and STDERR is returned to the client.
+
+# On a Unix system, the normal procedure is to have 'pre-lock'
+# invoke other programs to do the real work, though it may do the
+# work itself too.
+#
+# Note that 'pre-lock' must be executable by the user(s) who will
+# invoke it (typically the user httpd runs as), and that user must
+# have filesystem-level permission to access the repository.
+#
+# On a Windows system, you should name the hook program
+# 'pre-lock.bat' or 'pre-lock.exe',
+# but the basic idea is the same.
+#
+# Here is an example hook script, for a Unix /bin/sh interpreter:
+
+REPOS="$1"
+PATH="$2"
+USER="$3"
+
+
+GREP=/bin/grep
+SED=/bin/sed
+CAT=/bin/cat
+AWK=/bin/awk
+
+# Chinese filename are not allow
+SVNLOOK=/usr/bin/svnlook
+$SVNLOOK changed -t "$PATH" "$REPOS" | $AWK '{print $2}' | $GREP -e "[^a-zA-Z0-9._-/]"
+
+if [ $? -eq 0 ]; then
+        echo "Chinese filename are not allow!" >&2
+        exit 1;
+fi
+
+# If a lock exists and is owned by a different person, don't allow it
+# to be stolen (e.g., with 'svn lock --force ...').
+
+# (Maybe this script could send email to the lock owner?)
+SVNLOOK=/usr/bin/svnlook
+GREP=/bin/grep
+SED=/bin/sed
+CAT=/bin/cat
+
+LOCK_OWNER=`$SVNLOOK dirs-changed "$REPOS" -t "$PATH"`
+LOGCHK=`$SVNLOOK log -t "$PATH" "$REPOS" | $GREP "checker"`
+
+
+# If we get no result from svnlook, there's no lock, allow the lock to
+# happen:
+echo "$LOCK_OWNER" 1>&2
+#/bin/echo "$LOCK_OWNER" >>/data/logs/svn/a.txt
+
+if [ ${LOCK_OWNER:0:3} != "bbt" ]; then
+  if [ "$LOGCHK" = "" ]; then
+    echo "must has checker in log message!" 1>&2
+    exit 1
+  fi
+
+  LOCKSTAT=`$CAT /data/svndata/CServer/gunsoul/lockstatu.txt`
+  if [ ${LOCK_OWNER:0:6} == "en_pub" ]&&[ ! -z "`echo $LOCKSTAT|$GREP 2`" ]; then
+    echo "commit server build is permitted!"
+    exit 1
+  fi
+
+  if [ ${LOCK_OWNER:0:9} == "thai_main" ]&&[ ! -z "`echo $LOCKSTAT|$GREP 3`" ]; then
+    echo "commit server build is permitted!"
+    exit 1
+  fi
+
+  if [ ${LOCK_OWNER:0:19} == "branches/tw_gunsoul" ]&&[ ! -z "`echo $LOCKSTAT|$GREP 4`" ]; then
+    echo "commit server build is permitted!"
+    exit 1
+  fi
+  
+  if [ ${LOCK_OWNER:0:7} == "bz_main" ]&&[ ! -z "`echo $LOCKSTAT|$GREP 5`" ]; then
+    echo "commit server build is permitted!"
+    exit 1
+  fi
+
+  if [ ${LOCK_OWNER:0:12} == "Vietnam_main" ]&&[ ! -z "`echo $LOCKSTAT|$GREP 6`" ]; then
+    echo "commit server build is permitted!"
+    exit 1
+  fi
+
+  if [ ${LOCK_OWNER:0:7} == "en_main" ]&&[ ! -z "`echo $LOCKSTAT|$GREP 7`" ]; then
+    echo "commit server build is permitted!"
+    exit 1
+  fi
+
+  if [ ${LOCK_OWNER:0:12} == "expendables3" ]&&[ ! -z "`echo $LOCKSTAT|$GREP 8`" ]; then
+    echo "commit server build is permitted!"
+    exit 1
+  fi
+ /data/svndata/run_jenkins.sh ${LOCK_OWNER}
+
+ # echo "not bbt no locktest $2 $3 " 1>&2
+  exit 0
+fi
+
+# if not set lockbbt then skip
+LOCKSTAT=`$CAT /data/svndata/CServer/gunsoul/lockstatu.txt`
+#if [ "$LOCKSTAT" == "0" ]; then
+if [ -z "`echo $LOCKSTAT|$GREP 1`" ]; then
+  if [ "$LOGCHK" == "" ]; then
+    echo "must has checker in log message!" 1>&2
+    exit 1
+  fi
+
+/data/svndata/run_jenkins.sh ${LOCK_OWNER}
+  exit 0
+fi
+
+
+if [ ${LOCK_OWNER:0:18} == "bbt/Release/server" ]; then
+  echo "commit server build is permitted!"
+  exit 0
+fi
+
+
+/data/svndata/run_jenkins.sh ${LOCK_OWNER}
+# Otherwise, we've got an owner mismatch, so return failure:
+
+echo "Error: ${CPATH}  ${LOCK_OWNER} already locked by tester." 1>&2
+
+exit 1#!/bin/sh
+
+# PRE-COMMIT HOOK
+#
+# The pre-commit hook is invoked before a Subversion txn is
+# committed.  Subversion runs this hook by invoking a program
+# (script, executable, binary, etc.) named 'pre-commit' (for which
+# this file is a template), with the following ordered arguments:
+#
+#   [1] REPOS-PATH   (the path to this repository)
+#   [2] TXN-NAME     (the name of the txn about to be committed)
+#
+#   [STDIN] LOCK-TOKENS ** the lock tokens are passed via STDIN.
+#
+#   If STDIN contains the line "LOCK-TOKENS:\n" (the "\n" denotes a
+#   single newline), the lines following it are the lock tokens for
+#   this commit.  The end of the list is marked by a line containing
+#   only a newline character.
+#
+#   Each lock token line consists of a URI-escaped path, followed
+#   by the separator character '|', followed by the lock token string,
+#   followed by a newline.
+#
+# The default working directory for the invocation is undefined, so
+# the program should set one explicitly if it cares.
+#
+# If the hook program exits with success, the txn is committed; but
+# if it exits with failure (non-zero), the txn is aborted, no commit
+# takes place, and STDERR is returned to the client.   The hook
+# program can use the 'svnlook' utility to help it examine the txn.
+#
+# On a Unix system, the normal procedure is to have 'pre-commit'
+# invoke other programs to do the real work, though it may do the
+# work itself too.
+#
+#   ***  NOTE: THE HOOK PROGRAM MUST NOT MODIFY THE TXN, EXCEPT  ***
+#   ***  FOR REVISION PROPERTIES (like svn:log or svn:author).   ***
+#
+#   This is why we recommend using the read-only 'svnlook' utility.
+#   In the future, Subversion may enforce the rule that pre-commit
+#   hooks should not modify the versioned data in txns, or else come
+#   up with a mechanism to make it safe to do so (by informing the
+#   committing client of the changes).  However, right now neither
+#   mechanism is implemented, so hook writers just have to be careful.
+#
+# Note that 'pre-commit' must be executable by the user(s) who will
+# invoke it (typically the user httpd runs as), and that user must
+# have filesystem-level permission to access the repository.
+#
+# On a Windows system, you should name the hook program
+# 'pre-commit.bat' or 'pre-commit.exe',
+# but the basic idea is the same.
+#
+# The hook program typically does not inherit the environment of
+# its parent process.  For example, a common problem is for the
+# PATH environment variable to not be set to its usual value, so
+# that subprograms fail to launch unless invoked via absolute path.
+# If you're having unexpected problems with a hook program, the
+# culprit may be unusual (or missing) environment variables.
+# 
+# Here is an example hook script, for a Unix /bin/sh interpreter.
+# For more examples and pre-written hooks, see those in
+# /usr/share/subversion/hook-scripts, and in the repository at
+# http://svn.apache.org/repos/asf/subversion/trunk/tools/hook-scripts/ and
+# http://svn.apache.org/repos/asf/subversion/trunk/contrib/hook-scripts/
+
+#REPOS="$1"
+#TXN="$2"
+
+REPOS="$1"
+PATH="$2"
+USER="$3"
+
+# Make sure that the log message contains some text.
+GREP=/bin/grep
+SED=/bin/sed
+CAT=/bin/cat
+AWK=/bin/awk
+HEAD=/usr/bin/head
+
+SVNLOOK=/usr/bin/svnlook
+LOCK_OWNER=`$SVNLOOK dirs-changed "$REPOS" -t "$PATH"`
+SVN_USER=`$SVNLOOK info $REPOS|$HEAD -1`
+
+LOCKSTAT=`$CAT /data/svndata/CServer/gunsoul_mobile/lockstatu.txt`
+if [ ${LOCK_OWNER:0:4} == "arts" ]&&[ ! -z "`echo $LOCKSTAT|$GREP 1`" ]; then
+    [  -z `$CAT /data/svndata/CServer/gunsoul_mobile/unblockuser.txt|$GREP $SVN_USER 2>/dev/null` ]&&echo "commit server build is permitted!"&&exit 1
+fi
+if [ ${LOCK_OWNER:0:5} == "audio" ]&&[ ! -z "`echo $LOCKSTAT|$GREP 2`" ]; then
+    [  -z `$CAT /data/svndata/CServer/gunsoul_mobile/unblockuser.txt|$GREP $SVN_USER 2>/dev/null` ]&&echo "commit server build is permitted!"&&exit 1
+fi
+if [ ${LOCK_OWNER:0:8} == "branches" ]&&[ ! -z "`echo $LOCKSTAT|$GREP 3`" ]; then
+    [  -z `$CAT /data/svndata/CServer/gunsoul_mobile/unblockuser.txt|$GREP $SVN_USER 2>/dev/null` ]&&echo "commit server build is permitted!"&&exit 1
+fi
+if [ ${LOCK_OWNER:0:6} == "design" ]&&[ ! -z "`echo $LOCKSTAT|$GREP 4`" ]; then
+    [  -z `$CAT /data/svndata/CServer/gunsoul_mobile/unblockuser.txt|$GREP $SVN_USER 2>/dev/null` ]&&echo "commit server build is permitted!"&&exit 1
+fi
+if [ ${LOCK_OWNER:0:12} == "game/project" ]&&[ ! -z "`echo $LOCKSTAT|$GREP 5`" ]; then
+    [  -z `$CAT /data/svndata/CServer/gunsoul_mobile/unblockuser.txt|$GREP $SVN_USER 2>/dev/null` ]&&echo "commit server build is permitted!"&&exit 1
+fi
+if [ ${LOCK_OWNER:0:4} == "test" ]&&[ ! -z "`echo $LOCKSTAT|$GREP 6`" ]; then
+    [  -z `$CAT /data/svndata/CServer/gunsoul_mobile/unblockuser.txt|$GREP $SVN_USER 2>/dev/null` ]&&echo "commit server build is permitted!"&&exit 1
+fi
+
+#$SVNLOOK log -t "$TXN" "$REPOS" | \
+#   grep "[a-zA-Z0-9]" > /dev/null || exit 1
+
+$SVNLOOK changed -t "$PATH" "$REPOS" | $AWK '{print $2}' | $GREP -e "[^a-zA-Z0-9._-/]"
+if [ $? -eq 0 ]; then
+        echo "Chinese filename are not allow!" >&2
+        exit 1;
+fi
+
+# Exit on all errors.
+set -e
+
+# Check that the author of this commit has the rights to perform
+# the commit on the files and directories being modified.
+#"$REPOS"/hooks/commit-access-control.pl "$REPOS" $TXN \
+#  "$REPOS"/hooks/commit-access-control.cfg
+
+# All checks passed, so allow the commit.
+exit 0
