@@ -153,7 +153,8 @@ namespace CGUIClient
 				if (ret == System.Windows.Forms.DialogResult.OK)
 				{
 					Log("请求创建主分支:" + this.txtBoxBranch.Text, Color.DarkRed);
-                    cmd = string.Format("createroot\t{0}\t{1}\t{2}\t{3}\t{4}", this.txtLocalIP.Text, this.txtBoxName.Text, this.txtBoxBranch.Text, this.cbSelRoot.Text, this.cbProjectName.SelectedItem);
+                    cmd = string.Format("createroot\t{0}\t{1}\t{2}\t{3}\t{4}", 
+                        this.txtLocalIP.Text, this.txtBoxName.Text, this.txtBoxBranch.Text, this.cbSelRoot.Text, this.cbProjectName.SelectedItem);
 				}
 				else
 				{
@@ -165,7 +166,8 @@ namespace CGUIClient
 			else
 			{
 				// 创建开发分支直接创建
-                cmd = string.Format("createbranch\t{0}\t{1}\t{2}\t{3}\t{4}", this.txtLocalIP.Text, this.txtBoxName.Text, this.txtBoxBranch.Text, this.cbSelRoot.Text, this.cbProjectName.SelectedItem);
+                cmd = string.Format("createbranch\t{0}\t{1}\t{2}\t{3}\t{4}\t{5}",
+                    this.txtLocalIP.Text, this.txtBoxName.Text, this.txtBoxBranch.Text, this.cbSelRoot.Text, this.tbReversion.Text, this.cbProjectName.SelectedItem);
 			}
 			DispatchCmd(cmd);
 			//InitRootCB();

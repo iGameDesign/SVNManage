@@ -46,6 +46,8 @@
             this.chkRoot = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cbProjectName = new System.Windows.Forms.ComboBox();
+            this.lbReversion = new System.Windows.Forms.Label();
+            this.tbReversion = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lblAddress
@@ -67,7 +69,7 @@
             // lblPort
             // 
             this.lblPort.AutoSize = true;
-            this.lblPort.Location = new System.Drawing.Point(225, 19);
+            this.lblPort.Location = new System.Drawing.Point(226, 19);
             this.lblPort.Name = "lblPort";
             this.lblPort.Size = new System.Drawing.Size(47, 12);
             this.lblPort.TabIndex = 2;
@@ -75,7 +77,7 @@
             // 
             // txtBoxPort
             // 
-            this.txtBoxPort.Location = new System.Drawing.Point(275, 16);
+            this.txtBoxPort.Location = new System.Drawing.Point(277, 16);
             this.txtBoxPort.Name = "txtBoxPort";
             this.txtBoxPort.Size = new System.Drawing.Size(76, 21);
             this.txtBoxPort.TabIndex = 3;
@@ -93,7 +95,7 @@
             // 
             this.txtBoxBranch.Location = new System.Drawing.Point(74, 71);
             this.txtBoxBranch.Name = "txtBoxBranch";
-            this.txtBoxBranch.Size = new System.Drawing.Size(277, 21);
+            this.txtBoxBranch.Size = new System.Drawing.Size(132, 21);
             this.txtBoxBranch.TabIndex = 1;
             // 
             // lblLocal
@@ -132,9 +134,9 @@
             // 
             // btnCommit
             // 
-            this.btnCommit.Location = new System.Drawing.Point(365, 69);
+            this.btnCommit.Location = new System.Drawing.Point(411, 69);
             this.btnCommit.Name = "btnCommit";
-            this.btnCommit.Size = new System.Drawing.Size(121, 23);
+            this.btnCommit.Size = new System.Drawing.Size(111, 23);
             this.btnCommit.TabIndex = 8;
             this.btnCommit.Text = "提交创建申请";
             this.btnCommit.UseVisualStyleBackColor = true;
@@ -143,7 +145,7 @@
             // lblSelTip
             // 
             this.lblSelTip.AutoSize = true;
-            this.lblSelTip.Location = new System.Drawing.Point(221, 48);
+            this.lblSelTip.Location = new System.Drawing.Point(203, 48);
             this.lblSelTip.Name = "lblSelTip";
             this.lblSelTip.Size = new System.Drawing.Size(71, 12);
             this.lblSelTip.TabIndex = 4;
@@ -153,9 +155,9 @@
             // 
             this.cbSelRoot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSelRoot.FormattingEnabled = true;
-            this.cbSelRoot.Location = new System.Drawing.Point(294, 44);
+            this.cbSelRoot.Location = new System.Drawing.Point(277, 44);
             this.cbSelRoot.Name = "cbSelRoot";
-            this.cbSelRoot.Size = new System.Drawing.Size(132, 20);
+            this.cbSelRoot.Size = new System.Drawing.Size(115, 20);
             this.cbSelRoot.TabIndex = 9;
             // 
             // txtBoxInfo
@@ -172,7 +174,7 @@
             // 
             // btnRefreshRoots
             // 
-            this.btnRefreshRoots.Location = new System.Drawing.Point(431, 42);
+            this.btnRefreshRoots.Location = new System.Drawing.Point(411, 42);
             this.btnRefreshRoots.Name = "btnRefreshRoots";
             this.btnRefreshRoots.Size = new System.Drawing.Size(113, 23);
             this.btnRefreshRoots.TabIndex = 12;
@@ -183,7 +185,7 @@
             // chkRoot
             // 
             this.chkRoot.AutoSize = true;
-            this.chkRoot.Location = new System.Drawing.Point(492, 74);
+            this.chkRoot.Location = new System.Drawing.Point(536, 73);
             this.chkRoot.Name = "chkRoot";
             this.chkRoot.Size = new System.Drawing.Size(96, 16);
             this.chkRoot.TabIndex = 13;
@@ -207,11 +209,29 @@
             this.cbProjectName.Size = new System.Drawing.Size(121, 20);
             this.cbProjectName.TabIndex = 15;
             // 
+            // lbReversion
+            // 
+            this.lbReversion.AutoSize = true;
+            this.lbReversion.Location = new System.Drawing.Point(229, 74);
+            this.lbReversion.Name = "lbReversion";
+            this.lbReversion.Size = new System.Drawing.Size(47, 12);
+            this.lbReversion.TabIndex = 16;
+            this.lbReversion.Text = "版本号:";
+            // 
+            // tbReversion
+            // 
+            this.tbReversion.Location = new System.Drawing.Point(278, 69);
+            this.tbReversion.Name = "tbReversion";
+            this.tbReversion.Size = new System.Drawing.Size(100, 21);
+            this.tbReversion.TabIndex = 17;
+            // 
             // FormSvnOP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(695, 558);
+            this.Controls.Add(this.tbReversion);
+            this.Controls.Add(this.lbReversion);
             this.Controls.Add(this.cbProjectName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.chkRoot);
@@ -259,5 +279,7 @@
 		private System.Windows.Forms.CheckBox chkRoot;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbProjectName;
+        private System.Windows.Forms.Label lbReversion;
+        private System.Windows.Forms.TextBox tbReversion;
 	}
 }

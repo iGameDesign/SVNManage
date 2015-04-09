@@ -292,7 +292,7 @@
 			return this.m_strRet;
 		}
 
-        private bool CreateSvnBranch(string strIP, string strUserName, string strBranchNameA, string strVer, string szProjectName)
+        private bool CreateSvnBranch(string strIP, string strUserName, string strBranchNameA, string strVer, string strReversion, string szProjectName)
         {
             this.m_strUrlDest = string.Format(m_baseurl + "/{0}/{1}/",
                 m_svndb.Trim(new Char[] { '/' }),
@@ -301,12 +301,13 @@
             string strprefix = string.Format("{0}a{1:0000}_", this.m_strUrlDest, this.m_nVer);
             string pureBranchName = this.GetPureBranchName(strBranchNameA);
             string strfrom = string.Format("IP:{0}, User:{1}", strIP, strUserName);
-            string strparam = string.Format("cp -m \"create branch\" -m \"checker:auto  {0}\" {1} {2}{3}", 
-				new object[] { 
+            string strparam = string.Format("cp -m \"create branch\" -m \"checker:auto  {0}\" {1} {2}{3} -r {4}", 
+				new object[] {
 					strfrom, 
 					this.getStrUrlSrc(strVer), 
 					strprefix, 
-					pureBranchName });
+					pureBranchName,
+                    strReversion});
 			Program.log(strfrom, ConsoleColor.Blue);
             Program.log(this.getStrUrlSrc(strVer), ConsoleColor.Blue);
 			Program.log(strprefix, ConsoleColor.Blue);
@@ -647,10 +648,10 @@
             return true;
         }
 
-        public string OperSvn(string strIP, string strUserName, string strArg, string strVer, string szProjectName)
+        public string OperSvn(string strIP, string strUserName, string strArg, string strVer, string strReversion, string szProjectName)
         {
             this.m_strRet = "WARNING:no result!";
-            if (this.CreateSvnBranch(strIP, strUserName, strArg, strVer, szProjectName))
+            if (this.CreateSvnBranch(strIP, strUserName, strArg, strVer, strReversion, szProjectName))
             {
                 bool bRet = true;
                 this.m_strDest = string.Format("{0}:{1}", m_svndb, m_autobranch);
