@@ -121,9 +121,11 @@
                         }
                         catch(Exception e)
                         {
+                            // 处理此列值为null的情况
                             log(string.Format("[CopyRights_sql]Exception: {0}{1}", e.Message, e.StackTrace), ConsoleColor.Black);
-                            log(string.Format("[CopyRights_sql]Info: {0}", "此条数据特殊，权限为空，不插入"), ConsoleColor.Black);
-                            continue;
+                            //log(string.Format("[CopyRights_sql]Info: {0}", "此条数据特殊，权限为空，不插入"), ConsoleColor.Black);
+                            auth.subjectid = -1;
+                            //continue;
                         }
                         
                         auth.type = reader.GetString(5);
@@ -139,14 +141,29 @@
                 cmd.CommandText = "insert into permissions values(@repository, @repositorytype, @path, @subjecttype, @subjectid, @type)";
                 foreach (AuthDB item in authlist)
                 {
-                    cmd.Parameters.AddRange(new SqliteParameter[] {
-                        new SqliteParameter("@repository", item.repository),
-                        new SqliteParameter("@repositorytype", item.repositorytype),
-                        new SqliteParameter("@path", item.path),
-                        new SqliteParameter("@subjecttype", item.subjecttype),
-                        new SqliteParameter("@subjectid", item.subjectid),
-                        new SqliteParameter("@type", item.type)
-                    });
+                    if (item.subjectid != -1)
+                    {
+                        cmd.Parameters.AddRange(new SqliteParameter[] {
+                            new SqliteParameter("@repository", item.repository),
+                            new SqliteParameter("@repositorytype", item.repositorytype),
+                            new SqliteParameter("@path", item.path),
+                            new SqliteParameter("@subjecttype", item.subjecttype),
+                            new SqliteParameter("@subjectid", item.subjectid),
+                            new SqliteParameter("@type", item.type)
+                        });
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddRange(new SqliteParameter[] {
+                            new SqliteParameter("@repository", item.repository),
+                            new SqliteParameter("@repositorytype", item.repositorytype),
+                            new SqliteParameter("@path", item.path),
+                            new SqliteParameter("@subjecttype", item.subjecttype),
+                            new SqliteParameter("@subjectid", null),
+                            new SqliteParameter("@type", item.type)
+                        });
+                    }
+                    
                     cmd.ExecuteNonQuery();
                 }
                 trans.Commit();
@@ -650,6 +667,10 @@
 
         public string OperSvn(string strIP, string strUserName, string strArg, string strVer, string strReversion, string szProjectName)
         {
+            if (string.IsNullOrEmpty(strReversion))
+            {
+                strReversion = "HEAD";
+            }
             this.m_strRet = "WARNING:no result!";
             if (this.CreateSvnBranch(strIP, strUserName, strArg, strVer, strReversion, szProjectName))
             {
