@@ -104,7 +104,7 @@
                         }
                         else if (strArray[0] == "createbranch")
                         {
-                            mgr.m_svndb = strArray[5];
+                            mgr.m_svndb = strArray[6];
                             log(string.Format("来自[{0}]的用户[{1}], 请求建立分支:{2}, 选择的版本是:{3}, 版本号是:{4}", strArray[1], strArray[2], strArray[3], strArray[4], strArray[5]), ConsoleColor.Cyan);
                             format = mgr.OperSvn(strArray[1], strArray[2], strArray[3], strArray[4], strArray[5], strArray[6]);
                             log(string.Format("建立分支结果为:{0}", format), ConsoleColor.Cyan);

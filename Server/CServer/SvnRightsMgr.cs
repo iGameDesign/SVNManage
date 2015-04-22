@@ -325,6 +325,8 @@
 					strprefix, 
 					pureBranchName,
                     strReversion});
+            Program.log(strparam, ConsoleColor.Blue);
+            //return false;
 			Program.log(strfrom, ConsoleColor.Blue);
             Program.log(this.getStrUrlSrc(strVer), ConsoleColor.Blue);
 			Program.log(strprefix, ConsoleColor.Blue);

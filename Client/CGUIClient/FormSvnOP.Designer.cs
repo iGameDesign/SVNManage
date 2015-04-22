@@ -224,6 +224,7 @@
             this.tbReversion.Name = "tbReversion";
             this.tbReversion.Size = new System.Drawing.Size(100, 21);
             this.tbReversion.TabIndex = 17;
+            this.tbReversion.Text = "HEAD";
             // 
             // FormSvnOP
             // 
